@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="A_10_2014" id="A_10_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>A_10_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#A_10_2014">
+		<SimpleData name="ID">13</SimpleData>
+		<SimpleData name="SCHOOL">Virginia Commonwealth</SimpleData>
+		<SimpleData name="CONFERENCE">A-10</SimpleData>
+		<SimpleData name="CONFEREN_1">Mid</SimpleData>
+		<SimpleData name="ARENA LOCA">37.552917999999998</SimpleData>
+		<SimpleData name="LON">-77.452900000000000</SimpleData>
+		<SimpleData name="ARENA NAME">Stuart C. Siegel Center</SimpleData>
+		<SimpleData name="ARENA CAPA">7617</SimpleData>
+		<SimpleData name="ARENA OPEN">1999</SimpleData>
+		<SimpleData name="FULL NAME">VCU Rams</SimpleData>
+		<SimpleData name="area">61.563724342709975</SimpleData>
+		<SimpleData name="perim">40.507150658599599</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-80.840521,35.499278 -90.22797,38.63246 -78.484998,42.079428 -72.533439,42.389381 -71.535556,41.4875 -77.4529,37.552918 -80.840521,35.499278</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>VA Tornadoes Since 1950</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="images/Basketball.png" />
+    <link href="style/map_01.css" rel="stylesheet">
+    <style>
+     
+	  #left_nav {
+		  background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+			margin-left: 10px;
+			margin-top: 10px;
+	  }
+      #map-canvas {
+        margin-right: 400px;
+      }
+      .map_title_style
+	  {
+		color:#930;
+		font-family:Tahoma, Geneva, sans-serif;
+		font-size:16px;
+	  }
+	  .sub_title{
+		  font-size: 11px;
+        font-family: Arial;
+	  }
+      #map_title {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+	   #map_footer {
+        background: #fff;
+        padding: 5px;
+        
+        
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+		
+      }
+	  #info_content{
+		padding: 10px;
+	  }
+	  	#map_footer a{font-size: 12px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+	
+      @media print {
+        #map-canvas {
+          height: 500px;
+          margin: 0;
+        }
+
+       
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  <script src="script/hoopsmap_core.js"></script>
+
+    <script>
+		var map;
+		var info = new google.maps.InfoWindow;
+		var home_color = "#339933";
+		var transfer_color = "#CC0000";
+		var stroke_color = "#CC0000";
+		var info_html;
+		var ui_date = "-99";
+		var markersArray = [];
+		var linesArray = [];
+		var map_center = new google.maps.LatLng(38.00, -79.27);
+		var fusion_table_id = '11v1PpRVk8VRZ8NUiixzNzqllR87LCPjz4me-Uag';
+			
+		
+		
+      function initialize() {
+       
+        var mapOptions = {
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  panControl: false,
+		  zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.SMALL,
+			position: google.maps.ControlPosition.TOP_RIGHT
+		  },
+          center: map_center
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+		
+		      var style = [
+        {
+          featureType: 'all',
+          elementType: 'all',
+          stylers: [
+            { saturation: -50 }
+          ]
+        },
+		{
+			featureType: "landscape",
+   			 elementType: "geometry.fill",
+			stylers: [
+			  { hue: "#ff9900" },
+			  { saturation: -47 }
+			]
+		  },
+        {
+          featureType: 'poi',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        }
+      ];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+		google.maps.event.addListener(map, 'click', function() {
+      		info.close();
+    	});
+		
+	
+
+		var control = document.getElementById('left_nav');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(control);
+		google.maps.visualRefresh=true;
+		var query = "SELECT * FROM "+fusion_table_id;
+		loadFTdata(query, drawData);
+		//loadNeutralData();
+      }
+	 function drawData(data)
+		{
+			   var rows = data['rows'];
+			
+          for (var i in rows) {
+          
+			         	  var start_lat = rows[i][15];
+						  var start_lon = rows[i][16];
+						  var end_lat = rows[i][17];
+						  var end_lon = rows[i][18];
+						  var injuries = rows[i][11];
+						  var fatalities = rows[i][12];
+						  var start = getLatLng2(start_lat, start_lon);
+						  var end = getLatLng2(end_lat, end_lon);
+						  var date = rows[i][4];
+						  var f_scale = rows[i][10];
+						  
+						  if(f_scale == -9)
+						  {
+							f_scale = "n/a";
+						  }
+						  
+						  var text = "<b>Date</b>: "+date+"<br /><b>F Scale:</b> "+ f_scale +"<br /><b>Injuries:</b> "+injuries+"<br /><b>Fatalities:</b> "+fatalities;
+						  
+						  
+						  if(end_lon != 0)
+						  {
+							
+							//smallMarker(end, date, home_color, 3.5);
+							calcRoute(end, start, f_scale);
+						  }
+						  
+						  addMarker(start, text, date, f_scale, transfer_color, 2.5);
+			 }
+		}
+	
+		function calcRoute(start, end, fscale) {
+       
+		if(fscale == 1)
+				{
+					opacity = .5;
+				}
+				else if(fscale == 1)
+				{
+					opacity = .6;
+				}
+				else if(fscale == 2)
+				{
+					opacity = .7;
+				}
+				else if(fscale == 3)
+				{
+					opacity = .8;
+				}
+				else if(fscale > 3)
+				{
+					opacity = .9;
+				}
+				else
+				{
+					opacity = .4;
+				}
+		
+		var arena_path = [end, start];
+		var lineSymbol = {
+		scale: 1.5,
+		  path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+		};
+        var myPath = new google.maps.Polyline({
+          path: arena_path,
+		  icons: [{
+				icon: lineSymbol,
+				offset: '100%'
+			}],
+          strokeColor: stroke_color,
+          strokeOpacity: opacity,
+          strokeWeight: 1.2
+        });
+		linesArray.push(myPath);
+
+        myPath.setMap(map);
+
+		
+		}
+		function smallMarker(location, location_text, color, scale)
+		{
+			
+			
+			var marker = new google.maps.Marker({
+					  position: location,
+					  map: map,
+					icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 1,
+					fillColor:color,
+					strokeOpacity: 0.0,
+					strokeColor: color,
+					strokeWeight: 1.0, 
+					scale: scale //pixels
+				  },
+					 title:location_text
+			});	
+			markersArray.push(marker);
+			
+			google.maps.event.addListener(marker, "click", function() {
+				//info.open(map, marker);
+				alert(location_text);
+			});
+		}
+	    function addMarker(location, marker_text, info_html, fscale, color, scale)
+		{
+				if(fscale == 1)
+				{
+					opacity = .5;
+				}
+				else if(fscale == 1)
+				{
+					opacity = .6;
+				}
+				else if(fscale == 2)
+				{
+					opacity = .7;
+				}
+				else if(fscale == 3)
+				{
+					opacity = .8;
+				}
+				else if(fscale > 3)
+				{
+					opacity = .9;
+				}
+				else
+				{
+					opacity = .4;
+				}
+				
+				
+				var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				 icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: opacity,
+					fillColor:stroke_color,
+					strokeOpacity: 0.0,
+					strokeColor: stroke_color,
+					strokeWeight: 1.0, 
+					scale: scale //pixels
+				  },
+				 title:info_html
+			  });
+			  
+			  
+				markersArray.push(marker);
+
+			var contentString = '<div id="info_content">'+
+							marker_text+
+							'</div>';
+		var infowindow = new google.maps.InfoWindow({
+			content: marker_text,
+			position: location
+		});
+		
+		google.maps.event.addListener(marker,"click",function(event){
+			
+			infowindow.open(map);
+		}); 
+			
+			 
+			// Add listner for marker. You can add listner for any object. It is just an example in which I am specifying that infowindow will be open on marker mouseover
+			
+			
+			return true;
+		}
+	  
+
+	  function clearMarkers(){
+		if (markersArray) {
+			for (i in markersArray) {
+			  markersArray[i].setMap(null);
+			}
+		} 
+		if (linesArray) {
+			for (i in linesArray) {
+			  linesArray[i].setMap(null);
+			}
+		} 
+	  }
+	 
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="left_nav">
+    	<span class="map_title_style">
+    		Virginia Tornadoes Since 1950<br />
+            <span class="sub_title">(Data source: <A href="http://www.spc.noaa.gov/wcm/#data">NOAA severe weather database</A>)</span>
+        </span><br /><br />
+    	
+    </div>
+    
+    <div id="map_canvas"></div>
+  </body>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39180812-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </html>
+

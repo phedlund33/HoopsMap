@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Hoops Map: Conference Map</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script src="../script/geo.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script type="text/javascript" language="javascript" src="../script/jquery.dataTables.js"></script>
+    <!-- the style for the basemap (json) -->
+    <script type="text/javascript" language="javascript" src="../style/basemap_style.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+	<link href="../style/map_01.css" rel="stylesheet">
+	<link rel="icon" 
+      type="image/png" 
+      href="../images/Basketball.png" />
+	<style type="text/css" title="currentStyle">
+			@import "../style/jquery.dataTables.css";
+	</style>
+    <style type="text/css">
+		#map_footer {
+			background: #fff;
+			padding: 5px;
+			border: 1px solid #ccc;
+			box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+			display: none;
+		}
+		#cover-div {
+			position:absolute;
+			left:0px;
+			top:0px;
+			z-index:3;
+			background: #fff;
+			padding: 5px;
+			font-size: 13px;
+			font-family: 'PT Serif', serif;
+			border: 1px solid #ccc;
+			background: rgba(255, 255, 255, 0.6);
+			box-shadow: 0 0 2px rgba(33, 33, 33, 0.4);
+			width: 370px;
+			height: 100%;
+		}
+		#conf {
+			margin-top: 8px;
+			height: 350px;
+			border: 1px solid #CCC;
+			overflow: auto;
+			background: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 2px rgba(33, 33, 33, 0.4);
+			font-size: 10px;
+			
+		
+		}
+		#conf ul
+		{
+			list-style-type: none;
+			margin-left: -35px;
+			margin-top: 0px;font-family: Verdana, Geneva, sans-serif;
+		}
+		#map_title {
+        background: #fff;
+        padding: 5px;
+       font-size: 14px;
+       font-family: 'PT Serif', serif;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+	  span#check_em{
+		  font-size: 18px;
+	  }
+	  #map_title a{text-decoration: none;  color:#930;}
+	  #map_title a:link {color:#930;}
+	  #map_title a:hover { text-decoration: none; color:#930 }
+		.map_title_style
+		  {
+			color:#930;
+			font-family: 'PT Serif', serif;
+			font-size:22px;
+		  }
+		#footer{
+			margin-top: 5px;
+			border-top: 2 px solid #930;
+			color: #930;
+			font-size: 20px;
+		}
+		#close-me{
+			font-weight: bold;
+		}
+		.faux-link{
+			text-decoration: underline;
+			cursor: pointer;
+		}
+		#map_footer a{font-size: 22px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+		
+			#players-table{
+			margin-top: 5px;
+			margin-bottom: 5px;
+			
+			width: 370px;
+			
+	
+		}
+		#players{
+			border-collapse:collapse;
+			border: 1px solid #CCC;
+			
+		}
+		#players-table td {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 11px;
+			text-align: left;
+			border: 1px solid #CCC;
+			padding: 1px;
+		}
+		#players-table th {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 11px;
+			text-align: left;
+			border: 1px solid #CCC;
+		}
+		#players-table tr:hover {
+			cursor: pointer;
+			background-color:#FFC;
+		}
+		#players-table tr:nth-child(odd)		{ background-color:#eee; }
+		#players-table tr:nth-child(even)		{ background-color:#fff; }
+		
+    </style>
+	<script>
+	// JavaScript Document
+	google.load('visualization', '1');
+	
+	var map;
+	var markersArray = [];
+	function initialize() {
+		
+		
+		var myLatlng = new google.maps.LatLng(39,-120);
+		var mapOptions = {
+			zoom: 3,
+			streetViewControl: false,
+			panControl: false,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.SMALL,
+				position: google.maps.ControlPosition.TOP_RIGHT
+			},
+			center: myLatlng
+		};	
+		map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+		
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+	  
+	 
+	  var control = document.getElementById('map_title');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP].push(control);
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+			
+		
+		loadData();
+		//displayConference('ACC');
+		
+		
+	}
+	
+	function loadData(){
+		var checkboxes = "<ul>";
+        var query = "SELECT PLAYER_LATLON, CITY, HOME_COUNT FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I GROUP BY PLAYER_LATLON, CITY, HOME_COUNT";
+        var encodedQuery = encodeURIComponent(query);
+		var info_text = "";
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				
+				for (var i in rows) {
+					var location = rows[i][0];
+					
+					
+						info_text = loadLocationData(location);
+						
+					
+					addMarker(location, rows[i][1], info_text, rows[i][2]);
+					
+				}
+				
+				
+			}
+			
+        });
+		//conferences.join(',');
+		
+	}
+	function loadLocationData(place){
+		var checkboxes = "<ul>";
+        var query = "SELECT NAME, SCHOOL FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I WHERE PLAYER_LATLON = '"+place+"'";
+		//console.log(query);
+        var encodedQuery = encodeURIComponent(query);
+		var names = "";
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				
+				for (var i in rows) {
+					var name = rows[i][0];
+					names += name;
+					
+				}
+			
+				return names;	
+			}
+			
+        });
+		
+		
+	}
+
+	 function addMarker(location, marker_text, info_text, size)
+	{
+			
+				location_gm = getLatLng(location);
+			
+				var marker = new google.maps.Marker({
+				  position: location_gm,
+				  map: map,
+				  icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.9,
+					fillColor:'#1c9099',
+					strokeOpacity: 0.8,
+					strokeColor: '#dd1c77',
+					strokeWeight: 1.5, 
+					scale: (size/10) + 2//pixels
+				  },
+				 title:marker_text+", "+size
+			  });
+			
+			markersArray.push(marker);
+			
+			
+			
+			//alert(info_html);
+			var info = new google.maps.InfoWindow({
+				
+            	content: marker_text
+        	});
+			
+			 
+			// Add listner for marker. You can add listner for any object. It is just an example in which I am specifying that infowindow will be open on marker mouseover
+			google.maps.event.addListener(marker, "click", function() {
+				
+				info.open(map, marker);
+			});
+			
+			return true;
+	}
+	
+	
+	function getLatLng(coord)
+	  {
+		var coordinates = coord.split(",");
+        var lat = parseFloat(coordinates[0]);
+        var lon = parseFloat(coordinates[1]);
+        var myLatLng = new google.maps.LatLng(lat,lon);
+		
+		return myLatLng;
+		
+	 }
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+	 </script>
+  </head>
+  <body>
+  	<div id="map_title"><span class="map_title_style"><a href="../Home.html">The Geography of College Hoops</a></span><br />Where Players Come From</div>
+    <div id='map_canvas'></div>
+	
+	<div id="map_footer"></div>
+   
+  </body>
+   <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39180812-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

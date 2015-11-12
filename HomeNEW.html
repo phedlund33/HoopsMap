@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Hoops Map</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="images/Basketball.png" />
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+    <style type="text/css" title="currentStyle">
+			
+			@import "style/jquery.dataTables.css";
+	</style>
+    <style>
+	@charset "utf-8";
+	/* CSS Document */
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	#map_canvas {
+	  height: 100%;
+	 
+	}
+	
+	@media print {
+	  html, body {
+		height: auto;
+	  }
+	
+	  #map_canvas {
+		height: 650px;
+	  }
+	}
+
+	#weather_controls{
+		font-family: Tahoma, Geneva, sans-serif;
+		font-size: 9px;
+		margin-top: 5px;
+	}
+	#cover-div {
+		position:absolute;
+		left:0px;
+		top:0px;
+		z-index:3;
+		background: #fff;
+        padding: 5px;
+        font-size: 13px;
+        font-family: 'PT Serif', serif;
+        border: 1px solid #ccc;
+		background: rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 2px rgba(33, 33, 33, 0.4);
+        width: 370px;
+		height: 100%;
+	}
+		#games-table{
+			margin-top: 10px;
+			/*overflow: hidden;*/
+			
+			width: 370px;
+			float: left;
+			border-bottom: 1px solid #666;
+			border-left: 1px solid #666;
+			
+			
+		}
+		#games{
+			border-collapse:collapse;
+			border: 1px solid #CCC;
+			
+		}
+		#games-table td {
+			font-family: 'PT Serif', serif;
+			font-size: 10px;
+			text-align: left;
+			border: 1px solid #CCC;
+			padding: 1px;
+			
+			
+		}
+		#games-table th {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 10px;
+			text-align: left;
+			border: 1px solid #CCC;
+		}
+		#games-table tr:hover {
+			cursor: pointer;
+			background-color:#FFC;
+			
+		}
+
+		#games-table tr:nth-child(odd)		{ background-color:#eee; }
+		#games-table tr:nth-child(even)		{ background-color:#fff; }
+      
+	  #directions-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+	 
+     
+      .map_title_style
+	  {
+		color:#930;
+		font-family: 'PT Serif', serif;
+		font-size:22px;
+	  }
+      #map_title {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+       font-family: 'PT Serif', serif;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+	   #map_footer {
+        background: #fff;
+        padding: 5px;
+        
+        
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+		
+      }
+	  	#map_footer a{font-size: 12px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+	
+      @media print {
+        #map-canvas {
+          height: 500px;
+          margin: 0;
+        }
+
+        #directions-panel {
+          float: none;
+          width: auto;
+        }
+      }
+    </style>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp?libraries=weather&sensor=false"></script>-->
+	<script type="text/javascript"
+	  src="https://maps.googleapis.com/maps/api/js?libraries=weather&sensor=false">
+	</script>
+    <script src="script/geo.js"></script>
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  <script type="text/javascript" language="javascript" src="script/jquery.dataTables.js"></script>
+   <!-- the style for the basemap (json) -->
+    <script type="text/javascript" language="javascript" src="style/basemap_style.js"></script>
+
+    <script>
+		var map;
+		var info = new google.maps.InfoWindow;
+		var home_color = "#339933";
+		var neutral_color = "#CC0000";
+		var same_conf_color = "#181091";
+		var info_html;
+		var ui_date = "-99";
+		var markersArray = [];
+		var linesArray = [];
+		var games_table;
+		var map_marker;
+		var map_markers = [];
+		var weatherLayer;
+		var cloudLayer;
+		
+		$(function() {
+			
+			$( "#datepicker" ).datepicker({onSelect: function(date, datepicker){ setUIDate(date);}});
+			
+			
+		});
+		
+		function setUIDate(date)
+		{
+			console.log("set ui date");
+			clearMyMarkers();
+			deleteMarkers();
+			games_table = "";
+			var d = new Date(date);
+			var day = d.getDate();
+			var month = d.getMonth();
+			var year = d.getFullYear();
+			month = month + 1;
+			if(day < 10)
+			{
+				day = '0' + day;	
+			}
+			var str_date = month+"/"+day+"/"+year;
+			ui_date = str_date;
+			loadNeutralData();
+		}
+		function clearMyMarkers(){
+			//alert("start to clear markers...");
+			if (markersArray) {
+				for (i in markersArray) {
+				  markersArray[i].setMap(null);
+				}
+				markersArray = [];
+			} 
+			if (linesArray) {
+				for (i in linesArray) {
+				   
+				  linesArray[i].setMap(null);
+				}
+				linesArray = [];
+			} 
+	 	}
+		function getDistance(coord1, coord2)
+		{
+			var location1 = coord1.split(',');
+			var location2 = coord2.split(',');
+			var p1 = new LatLon(location1[0], location1[1]);                                                      
+			var p2 = new LatLon(location2[0], location2[1]);                                                     
+			var dist = p1.distanceTo(p2);
+			dist = dist * 0.62137;
+			dist = Math.ceil(dist * 10) / 10;
+			return dist;
+		}
+		function sameConference(str_conferece)
+		{
+			var arr_conf = str_conferece.split('/');
+			
+			if(arr_conf[0] == arr_conf[1])
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			
+	   }
+	   function getStrDate()
+	   {
+		   	//get today's date
+			var d = new Date();
+			var day = d.getDate();
+			var month = d.getMonth();
+			var year = d.getFullYear();
+			month = month + 1;
+			var urlDate = getUrlVars()["date"];
+			
+			if(day < 10)
+			{
+				day = '0' + day;	
+			}
+			var str_date = month+"/"+day+"/"+year;
+			var return_var;
+			if(ui_date != "-99")
+			{
+				
+				//use the date from the calendar widget
+				return_var = ui_date;
+			}
+			else if(!urlDate)
+			{
+				//use today's date
+				return_var = str_date;
+			}
+			else
+			{
+				//use the date from the URL
+				return_var = urlDate;
+			}
+			
+			//$("span#date").text(return_var);
+			return return_var;
+			
+	   }
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+      function initialize() {
+        getTodayDate();
+        var mapOptions = {
+          zoom: 4,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  panControl: false,
+		  zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.SMALL,
+			position: google.maps.ControlPosition.TOP_RIGHT
+		  },
+          center: new google.maps.LatLng(39,-120)
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+		
+		     
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+		google.maps.event.addListener(map, 'click', function() {
+      		info.close();
+    	});
+		
+		/*
+		var control = document.getElementById('map_title');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP].push(control);
+		*/
+		var control = document.getElementById('map_footer');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.BOTTOM].push(control);
+		/*
+		var control = document.getElementById('left_nav');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(control);
+		google.maps.visualRefresh=true;
+		*/
+		//displayWeather();
+       	//calcRoute();
+        //loadData();
+	  loadNeutralData();
+	  
+	  
+	  
+      }
+	  function displayTemps()
+	  {
+		
+		
+		if($('#temps').attr('checked')) {
+			weatherLayer = new google.maps.weather.WeatherLayer({
+				temperatureUnits: google.maps.weather.TemperatureUnit.FAHRENHEIT
+			});
+			weatherLayer.setMap(map);
+		} else {
+			
+			weatherLayer.setMap(null);
+		}
+  
+	  }
+	   function displayClouds()
+	  {
+		
+		
+		if($('#clouds').attr('checked')) {
+			cloudLayer = new google.maps.weather.CloudLayer();
+			cloudLayer.setMap(map);
+		} else {
+			
+			cloudLayer.setMap(null);
+		}
+		
+  
+	  }
+	  function getLatLng(coord)
+	  {
+		var coordinates = coord.split(",");
+        var lat = parseFloat(coordinates[0]);
+        var lon = parseFloat(coordinates[1]);
+        var myLatLng = new google.maps.LatLng(lat,lon);
+		
+		return myLatLng;
+		
+	  }
+		//35.852466, -86.369802,34.509722, -93.049167
+      function calcRoute(start, end, neutral, same_conf) {
+        var color = neutral_color;			
+		
+		if(neutral)
+		{
+			color = home_color;	
+		}
+		if(same_conf)
+		{
+			color = same_conf_color;	
+		}
+		
+		//var start = document.getElementById('start').value;
+        //var end = document.getElementById('end').value;
+		start = getLatLng(start);
+		end = getLatLng(end);
+		//addMarker(start, marker_text);
+		//addMarker(end);
+		var new_start = new google.maps.LatLng(start);
+		var new_end = new google.maps.LatLng(end);
+		var arena_path = [end, start];
+		var lineSymbol = {
+		scale: 2,
+		  path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+		};
+        var myPath = new google.maps.Polyline({
+          path: arena_path,
+		  //icons: [{
+			//icon: lineSymbol,
+			//offset: '98%'
+		 // }],
+          strokeColor: color,
+          strokeOpacity: .5,
+          strokeWeight: 1.2
+        });
+		linesArray.push(myPath);
+		//alert("got here");
+        myPath.setMap(map);
+		
+		//google.maps.event.addListener(myPath, 'mouseover', function() {
+			// alert("hi");
+			 // TODO: display which section of the polyline has been clicked?
+		// });
+		
+		}
+		function smallMarker(location, location_text, neutral, same_conf)
+		{
+			
+			var color = neutral_color;			
+			
+			if(neutral)
+			{
+				color = home_color;	
+			}
+			if(same_conf)
+			{
+				color = same_conf_color;	
+			}
+			var marker = new google.maps.Marker({
+					  position: location,
+					  map: map,
+					icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 1,
+					fillColor:color,
+					strokeOpacity: 0.0,
+					strokeColor: color,
+					strokeWeight: 1.0, 
+					scale: 3.5 //pixels
+				  },
+					 title:location_text
+			});	
+			markersArray.push(marker);
+		}
+	    function addMarker(location, marker_text, info_html, neutral, size, same_conf)
+		{
+			var color = neutral_color;	
+			var size_ = 5;
+			
+			if(neutral)
+			{
+				color = home_color;	
+				size_ = 6;
+			}
+			if(same_conf)
+			{
+				color = same_conf_color;	
+			}
+			if(size == "big")
+			{
+				var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				  //icon: "http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-ff8a22/shapecolor-white/shadow-1/border-color/symbolstyle-color/symbolshadowstyle-no/gradient-no/basketballfield.png",
+				 icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.7,
+					fillColor:color,
+					strokeOpacity: 0.8,
+					strokeColor: color,
+					strokeWeight: 2.0, 
+					scale: size_ //pixels
+				  },
+				 title:marker_text
+			  });
+				markersArray.push(marker);
+			}
+			else
+			{
+			
+				var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				  //icon: "http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-ff8a22/shapecolor-white/shadow-1/border-color/symbolstyle-color/symbolshadowstyle-no/gradient-no/basketballfield.png",
+				 icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.7,
+					fillColor:color,
+					strokeOpacity: 0.8,
+					strokeColor: color,
+					strokeWeight: 2.0, 
+					scale: 2 //pixels
+				  },
+				 title:marker_text
+			  });	
+				markersArray.push(marker);
+			}
+			
+			//alert(info_html);
+			var info = new google.maps.InfoWindow({
+            	content: info_html
+        	});
+			
+			 
+			// Add listner for marker. You can add listner for any object. It is just an example in which I am specifying that infowindow will be open on marker mouseover
+			google.maps.event.addListener(marker, "click", function() {
+				info.open(map, marker);
+			});
+			
+			return true;
+		}
+	  
+	   function loadData() {
+		   
+		var str_date = getStrDate();
+		   
+        var query = "SELECT * FROM 1ZVQ0g93Pn4ZfKGyzPPL-npKs-djZXEMSarisb0s WHERE Date = '"+str_date+"' AND 'Neutral' NOT EQUAL TO 'yes'" ;
+        var encodedQuery = encodeURIComponent(query);
+		 //var encodedQuery = query;
+        // Construct the URL
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+       
+	   //	var counter = 0;
+        // Send the JSONP request using jQuery
+        $.ajax({
+          url: url.join(''),
+          dataType: 'jsonp',
+          success: function (data) {
+            var rows = data['rows'];
+			
+            for (var i in rows) {
+              var start = rows[i][10];
+			  var end = rows[i][11];
+			  var home_team = rows[i][3];
+			  var road_team = rows[i][2];
+			  var marker_text = road_team+' at '+home_team+', '+rows[i][1];
+			   //counter += 1;
+			  var line = rows[i][12];
+			  if(line.length > 0)
+			  {
+				line = line;  
+			  }else{
+				line = false;  
+			  }
+			  calcRoute(start, end, false, sameConference(rows[i][6]));
+			  var conf;
+			  if(sameConference(rows[i][6]))
+			  {
+				var arr_conf = rows[i][6].split('/');
+				conf = arr_conf[0];
+			  }
+			  else
+			  {
+				conf = rows[i][6];  
+			  }
+			  var distance = getDistance(start, end);
+			  smallMarker(getLatLng(end), marker_text, false, sameConference(rows[i][6]));
+			  info_html = "<div>";
+			  if(rows[i][4])
+			  {
+			  	info_html += "<b>Game Time:</b> "+rows[i][1]+" ("+rows[i][4]+")";
+			  }else{
+				info_html += "<b>Game Time:</b> "+rows[i][1];  
+			  }
+			  info_html += "<br /><b>Road Team:</b> "+road_team +" ("+distance+" miles)";
+			  if(line)
+			  {
+			  	info_html += "<br /><b>Home Team:</b> "+home_team +" ("+rows[i][12]+")";
+			  }else
+			  {
+				info_html += "<br /><b>Home Team:</b> "+home_team ;
+			  }
+			  
+			  info_html += "<br /><b>Conference:</b> "+rows[i][6];
+			  info_html += "<br /><b>Arena:</b> "+rows[i][7];
+			  info_html += "<br /><b>Capacity:</b> "+rows[i][9];
+			  if(rows[i][4])
+			  {
+				info_html += "<br /><b>TV:</b> "+rows[i][4];  
+			  }
+			  if(rows[i][15] != "")
+			  {
+				  info_html += "<br />"+rows[i][15];
+			  }
+			  info_html += "</div>";
+			  var tool_tip = "";
+			  if(rows[i][12])
+			  {
+				tool_tip += "line: "+rows[i][12];  
+			  }
+			   if(rows[i][4])
+			  {
+				tool_tip += " tv: "+rows[i][4];  
+			  }
+			  
+			  addMarker(getLatLng(start), marker_text, info_html, false, "big", sameConference(rows[i][6]));
+			  
+			  games_table += "<tr data-location='"+start+"' title='"+tool_tip+"' alt='"+tool_tip+"'><td>"+rows[i][1]+"</td><td>"+road_team+"</td><td>"+home_team+"</td><td>"+Math.round(distance)+"</td><td>"+conf+"</td></tr>";
+			  
+			  
+            
+			 }
+			 games_table += "</tbody></table>";
+			 
+			 $("#games-table").html(games_table);
+			 $('#games').dataTable( {
+				"bPaginate": false,
+				"sScrollY": "540px",
+				"bFilter": false,
+				"bInfo": false
+			  } );
+			 tableActions();
+          }
+        });
+
+		//alert(counter);
+      }
+	 
+	  function loadNeutralData() {
+		 var info_html;  
+		 var neutral;
+		games_table = "<table id='games'>";
+		games_table += "<thead><tr><th>Time</th><th>Away</th><th>Home</th><th>Distance</th><th>Conference</th></tr></thead><tbody>";
+		var str_date = getStrDate();
+		   
+        var query = "SELECT * FROM 1ZVQ0g93Pn4ZfKGyzPPL-npKs-djZXEMSarisb0s WHERE Date = '"+str_date+"' order by 'Arena'" ;
+        var encodedQuery = encodeURIComponent(query);
+		 //var encodedQuery = query;
+        // Construct the URL
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+       
+	   //	var counter = 0;
+        // Send the JSONP request using jQuery
+        $.ajax({
+          url: url.join(''),
+          dataType: 'jsonp',
+          success: function (data) {
+			 
+            var rows = data['rows'];
+			
+            for (var i in rows) {
+				neutral = rows[i][8];
+				
+				
+			 if(neutral == "yes")
+			 {
+				
+					  var home_team_location = rows[i][13];
+					  var neutral_arena_location = rows[i][10];
+					  var visiting_arena_location = rows[i][11];
+					  
+					  var home_distance = Math.round(getDistance(home_team_location, neutral_arena_location));
+					  var road_distance = Math.round(getDistance(visiting_arena_location, neutral_arena_location));
+					  var str_distance = road_distance+"/"+home_distance;
+					  
+					  var home_team = rows[i][3];
+					  var road_team = rows[i][2];
+					  var marker_text = "Neutral site game or tournament location.";
+					  //var distance = getDistance(start, end);
+					  calcRoute(home_team_location, neutral_arena_location, true, sameConference(rows[i][6]));
+					  calcRoute(visiting_arena_location, neutral_arena_location, true);
+					  smallMarker(getLatLng(home_team_location), home_team, true, sameConference(rows[i][6]) );
+					  smallMarker(getLatLng(visiting_arena_location), road_team, true, sameConference(rows[i][6]) );
+					   //check for multiple games at arena location
+					  var tool_tip = ""; 
+					  if(rows[i][12])
+					  {
+						tool_tip += "line: "+rows[i][12];  
+					  }
+					   if(rows[i][4])
+					  {
+						tool_tip += " tv: "+rows[i][4];  
+					  }
+					   var conf; 
+					   if(sameConference(rows[i][6]))
+					  {
+						var arr_conf = rows[i][6].split('/');
+						conf = arr_conf[0];
+					  }
+					  else
+					  {
+						conf = rows[i][6];  
+					  }
+		
+						info_html = "<div>";
+						info_html += rows[i][15];
+						//info_html += "<br /><b>Conference:</b> "+rows[i][6];
+						info_html += "<br /><b>Arena:</b> "+rows[i][7];
+						info_html += "<br /><b>Capacity:</b> "+rows[i][9];
+						info_html += "</div>";
+						
+						addMarker(getLatLng(neutral_arena_location), marker_text, info_html, true, "big",sameConference(rows[i][6]));
+						
+						//games_table += "<tr data-location="+neutral_arena_location+" ><td>"+rows[i][1]+"</td><td>"+home_team+"</td><td></td><td>"+road_team+"</td><td>"+rows[i][12]+"</td></tr>";
+						games_table += "<tr data-location='"+neutral_arena_location+"' title='"+tool_tip+"' alt='"+tool_tip+"'><td>"+rows[i][1]+"</td><td>"+road_team+"</td><td>"+home_team+"</td><td>"+str_distance+"</td><td>"+conf+"</td></tr>";
+			 }
+			 else{
+				 
+					  var start = rows[i][10];
+					  var end = rows[i][11];
+					  var home_team = rows[i][3];
+					  var road_team = rows[i][2];
+					  var marker_text = road_team+' at '+home_team+', '+rows[i][1];
+					   //counter += 1;
+					  var line = rows[i][12];
+					  if(line.length > 0)
+					  {
+						line = line;  
+					  }else{
+						line = false;  
+					  }
+					  calcRoute(start, end, false, sameConference(rows[i][6]));
+					  var conf;
+					  if(sameConference(rows[i][6]))
+					  {
+						var arr_conf = rows[i][6].split('/');
+						conf = arr_conf[0];
+					  }
+					  else
+					  {
+						conf = rows[i][6];  
+					  }
+					  var distance = getDistance(start, end);
+					  smallMarker(getLatLng(end), marker_text, false, sameConference(rows[i][6]));
+					  info_html = "<div>";
+					  if(rows[i][4])
+					  {
+						info_html += "<b>Game Time:</b> "+rows[i][1]+" ("+rows[i][4]+")";
+					  }else{
+						info_html += "<b>Game Time:</b> "+rows[i][1];  
+					  }
+					  info_html += "<br /><b>Road Team:</b> "+road_team +" ("+distance+" miles)";
+					  if(line)
+					  {
+						info_html += "<br /><b>Home Team:</b> "+home_team +" ("+rows[i][12]+")";
+					  }else
+					  {
+						info_html += "<br /><b>Home Team:</b> "+home_team ;
+					  }
+					  
+					  info_html += "<br /><b>Conference:</b> "+rows[i][6];
+					  info_html += "<br /><b>Arena:</b> "+rows[i][7];
+					  info_html += "<br /><b>Capacity:</b> "+rows[i][9];
+					  if(rows[i][4])
+					  {
+						info_html += "<br /><b>TV:</b> "+rows[i][4];  
+					  }
+					  if(rows[i][15] != "")
+					  {
+						  info_html += "<br />"+rows[i][15];
+					  }
+					  info_html += "</div>";
+					  var tool_tip = "";
+					  if(rows[i][12])
+					  {
+						tool_tip += "line: "+rows[i][12];  
+					  }
+					   if(rows[i][4])
+					  {
+						tool_tip += " tv: "+rows[i][4];  
+					  }
+					  
+					  addMarker(getLatLng(start), marker_text, info_html, false, "big", sameConference(rows[i][6]));
+					  
+					  games_table += "<tr data-location='"+start+"' title='"+tool_tip+"' alt='"+tool_tip+"'><td>"+rows[i][1]+"</td><td>"+road_team+"</td><td>"+home_team+"</td><td>"+Math.round(distance)+"</td><td>"+conf+"</td></tr>";
+					  
+			  
+				 
+				 
+			 }
+				
+				//addMarker(getLatLng(home_team_location), home_team, "", true, "small");
+				//addMarker(getLatLng(visiting_arena_location), road_team, "", true, "small");
+			  }
+			  
+             games_table += "</tbody></table>";
+			 
+			 $("#games-table").html(games_table);
+			 $('#games').dataTable( {
+				"bPaginate": false,
+				"sScrollY": "540px",
+				"bFilter": false,
+				"bInfo": false
+			  } );
+			 tableActions();
+			 
+          }
+        });
+		
+		
+		//loadData();
+      }
+	    function tableActions()
+		{
+			$('#games tr').click(function(event) {
+						 var locale = $(this).attr( "data-location" )
+						 
+						 markerDrop(locale);
+			});
+			$("#games tr").not(':first').hover(
+			  function () {
+				$(this).css("background","#ffbd0a");
+			  }, 
+			  function () {
+				$(this).css("background","");
+			  }
+			);
+			
+		}
+		function markerDrop(locale)
+		{
+			 	deleteMarkers();
+				
+				
+				
+				map_marker = new google.maps.Marker({
+				map:map,
+				draggable:false,
+				icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.7,
+					fillColor: "#ffbd0a",
+					strokeOpacity: 0.8,
+					strokeColor: "#ffbd0a",
+					strokeWeight: 2.0, 
+					scale: 7 //pixels
+				},
+				animation: google.maps.Animation.DROP,
+				position: getLatLng(locale)
+			  });	
+			  map.setCenter(getLatLng(locale));
+			  map_markers.push(map_marker);
+			
+		}
+		// Sets the map on all markers in the array.
+		function setAllMap(map) {
+		  for (var i = 0; i < map_markers.length; i++) {
+			map_markers[i].setMap(map);
+		  }
+		}
+		
+		// Removes the markers from the map, but keeps them in the array.
+		function clearMarkers() {
+		  setAllMap(null);
+		}
+		
+		// Shows any markers currently in the array.
+		function showMarkers() {
+		  setAllMap(map);
+		}
+		
+		// Deletes all markers in the array by removing references to them.
+		function deleteMarkers() {
+		  clearMarkers();
+		  map_markers = [];
+		}
+
+		function getTodayDate()
+		{
+			today=new Date(); // Initialize Date in raw form
+			date=today.getDate(); // Get the numerical date
+			year=today.getYear(); // Get the year
+			day = today.getDay(); // Get the day in number form (0,1,2,3,etc.)
+			month=today.getMonth()+1; // Get the month
+			
+			if (year<1900) year=(year+1900)
+			else if (year>2000) year=year;
+			
+			// Add suffix to date (1st, 2nd, 4th, etc.)
+			if (date==1) suffix=("st");
+			else if (date==2) suffix=("nd");
+			else if (date==3) suffix=("rd");
+			else if (date==21) suffix=("st");
+			else if (date==22) suffix=("nd");
+			else if (date==23) suffix=("rd");
+			else if (date==31) suffix=("st");
+			else suffix=("th");
+			
+			// Make month number correspond to month name
+			if (month==1) monthName=("January");
+			else if (month==2) monthName=("February");
+			else if (month==3) monthName=("March");
+			else if (month==4) monthName=("April");
+			else if (month==5) monthName=("May");
+			else if (month==6) monthName=("June");
+			else if (month==7) monthName=("July");
+			else if (month==8) monthName=("August");
+			else if (month==9) monthName=("September");
+			else if (month==10) monthName=("October");
+			else if (month==11) monthName=("November");
+			else monthName=("December");
+			
+			if (day==0) dayName =("Sunday");
+			else if (day==1) dayName=("Monday");
+			else if (day==2) dayName=("Tuesday");
+			else if (day==3) dayName=("Wednesday");
+			else if (day==4) dayName=("Thursday");
+			else if (day==5) dayName=("Friday");
+			else if (day==6) dayName=("Saturday");
+			
+			//$("span#date").text(dayName + ", " + monthName +" "+ date + ", " + year);
+			//$("span#date").text(getStrDate());
+			
+		}
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+  
+    <!--<div id="map_title"><span class="map_title_style">The Geography of College Basketball</span><br /><span id="date"></span></div>-->
+    
+    <div id="map_footer"><a href="map/all_arenas.html">All NCAA Division I College Basketball Arenas</a></div>
+    <div id="cover-div">
+    	<div id="date">
+    	<span class="map_title_style">
+    		The Geography of College Basketball
+        </span><br /><br />
+    	<div id="datepicker"></div>
+    	</div>
+		<div id="weather_controls">CLOUDS <input type="checkbox" id="clouds" name="clouds" onClick="displayClouds()" /> TEMPS <input type="checkbox" id="temps" name="temps" onClick="displayTemps()" /></div>
+    	<div id="games-table"></div>
+	</div>
+    <div id="map_canvas"></div>
+    
+  </body>
+  
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39180812-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
+

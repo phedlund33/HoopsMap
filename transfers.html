@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Hoops Map</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="images/Basketball.png" />
+    <link href="style/map_01.css" rel="stylesheet">
+    <style>
+      #directions-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+	  #left_nav {
+		  background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+			margin-left: 10px;
+			margin-top: 10px;
+	  }
+      #map-canvas {
+        margin-right: 400px;
+      }
+	  #transfer_content
+	  {
+	  	
+		font-family:Tahoma, Geneva, sans-serif;
+		font-size:14px;
+	  }
+      .map_title_style
+	  {
+		color:#930;
+		font-family:Tahoma, Geneva, sans-serif;
+		font-size:16px;
+	  }
+      #map_title {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+	   #map_footer {
+        background: #fff;
+        padding: 5px;
+        
+        
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+		
+      }
+	  	#map_footer a{font-size: 12px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+	
+      @media print {
+        #map-canvas {
+          height: 500px;
+          margin: 0;
+        }
+
+        #directions-panel {
+          float: none;
+          width: auto;
+        }
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <script>
+		var map;
+		var info = new google.maps.InfoWindow;
+		var neutral_color = "#339933";
+		var home_color = "#CC0000";
+		var transfer_color = "#120873";
+		var info_html;
+		var ui_date = "-99";
+		var markersArray = [];
+		var linesArray = [];
+		var FT_transfers = "1x4vlLGSwqCZEe30S6gelZ_9G5rPAhYXEkusQ75c";
+		
+		$(function() {
+			
+			$( "#datepicker" ).datepicker({onSelect: function(date, datepicker){ setUIDate(date);}});
+			
+			
+		});
+		
+		function setUIDate(date)
+		{
+			clearMarkers();
+			var d = new Date(date);
+			var day = d.getDate();
+			var month = d.getMonth();
+			var year = d.getFullYear();
+			month = month + 1;
+			if(day < 10)
+			{
+				day = '0' + day;	
+			}
+			var str_date = month+"/"+day+"/"+year;
+			ui_date = str_date;
+			loadNeutralData();
+		}
+		
+	   function getStrDate()
+	   {
+		   	//get today's date
+			var d = new Date();
+			var day = d.getDate();
+			var month = d.getMonth();
+			var year = d.getFullYear();
+			month = month + 1;
+			var urlDate = getUrlVars()["date"];
+			
+			if(day < 10)
+			{
+				day = '0' + day;	
+			}
+			var str_date = month+"/"+day+"/"+year;
+			var return_var;
+			if(ui_date != "-99")
+			{
+				
+				//use the date from the calendar widget
+				return_var = ui_date;
+			}
+			else if(!urlDate)
+			{
+				//use today's date
+				return_var = str_date;
+			}
+			else
+			{
+				//use the date from the URL
+				return_var = urlDate;
+			}
+			
+			//$("span#date").text(return_var);
+			return return_var;
+			
+	   }
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+      function initialize() {
+        getTodayDate();
+        var mapOptions = {
+          zoom: 5,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  panControl: false,
+		  zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.SMALL,
+			position: google.maps.ControlPosition.TOP_RIGHT
+		  },
+          center: new google.maps.LatLng(38.68551,-97.470703)
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+		
+		      var style = [
+        {
+          featureType: 'all',
+          elementType: 'all',
+          stylers: [
+            { saturation: -50 }
+          ]
+        },
+		{
+			featureType: "landscape",
+   			 elementType: "geometry.fill",
+			stylers: [
+			  { hue: "#ff9900" },
+			  { saturation: -47 }
+			]
+		  },
+        {
+          featureType: 'poi',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        }
+      ];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+		google.maps.event.addListener(map, 'click', function() {
+      		info.close();
+    	});
+		
+		/*
+		var control = document.getElementById('map_title');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP].push(control);
+		*/
+		var control = document.getElementById('map_footer');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.BOTTOM].push(control);
+
+		var control = document.getElementById('left_nav');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(control);
+		
+		
+		//showClouds();
+       	//calcRoute();
+        //loadData();
+	  //loadNeutralData();
+	  loadTransferData();
+      }
+	 
+	  function getLatLng(coord)
+	  {
+		var coordinates = coord.split(",");
+        var lat = parseFloat(coordinates[0]);
+        var lon = parseFloat(coordinates[1]);
+        var myLatLng = new google.maps.LatLng(lat,lon);
+		
+		return myLatLng;
+		
+	  }
+		
+      function calcRoute(start, end, color, text) {
+
+		start = getLatLng(start);
+		end = getLatLng(end);
+
+		var new_start = new google.maps.LatLng(start);
+		var new_end = new google.maps.LatLng(end);
+		var arena_path = [end, start];
+		if (color == transfer_color){
+			var lineSymbol = {
+				scale: 2,
+				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+			};
+		}
+        
+		var visiblePath = new google.maps.Polyline({
+          path: arena_path,
+		  icons: [{
+				icon: lineSymbol,
+				offset: '100%'
+			}],
+          strokeColor: color,
+          strokeOpacity: .5,
+          strokeWeight: 1.4
+        });
+		var myPath = new google.maps.Polyline({
+          path: arena_path,
+          strokeColor: color,
+          strokeOpacity: .03,
+          strokeWeight: 19
+        });
+		var contentString = '<div id="transfer_content">'+
+							text+
+							'</div>';
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString,
+			position: end
+		});
+		
+		google.maps.event.addListener(myPath,"mouseover",function(event){
+			infowindow.setPosition(event.latLng);
+			infowindow.open(map);
+		}); 
+		google.maps.event.addListener(myPath,"mouseout",function(){
+
+		  infowindow.close(map);
+		});
+		
+		
+		linesArray.push(myPath);
+        myPath.setMap(map);
+		visiblePath.setMap(map);
+		
+		}
+		function smallMarker(location, location_text, color, scale)
+		{
+			
+			
+			var marker = new google.maps.Marker({
+					  position: location,
+					  map: map,
+					icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 1,
+					fillColor:color,
+					strokeOpacity: 0.0,
+					strokeColor: color,
+					strokeWeight: 1.0, 
+					scale: scale //pixels
+				  },
+					 title:location_text
+			});	
+			markersArray.push(marker);
+			
+			google.maps.event.addListener(marker, "click", function() {
+				//info.open(map, marker);
+				alert(location_text);
+			});
+		}
+	    function addMarker(location, marker_text, info_html, color, scale)
+		{
+			
+			
+				var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				 icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 1.0,
+					fillColor:color,
+					strokeOpacity: 0.0,
+					strokeColor: color,
+					strokeWeight: 1.0, 
+					scale: scale //pixels
+				  },
+				 title:marker_text
+			  });
+			  
+			  
+				markersArray.push(marker);
+
+			//loadPlayerData(marker_text);
+			
+			 
+			// Add listner for marker. You can add listner for any object. It is just an example in which I am specifying that infowindow will be open on marker mouseover
+			
+			
+			return true;
+		}
+	   function loadTransferData()
+	   {
+			var query = "SELECT * FROM "+FT_transfers ;
+        var encodedQuery = encodeURIComponent(query);
+		 //var encodedQuery = query;
+        // Construct the URL
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+		
+			  
+        // Send the JSONP request using jQuery
+        $.ajax({
+          url: url.join(''),
+          dataType: 'jsonp',
+          success: function (data) {
+            var rows = data['rows'];
+			
+            for (var i in rows) {
+              var start = rows[i][7];
+			  var end = rows[i][9];
+			  var player = rows[i][1];
+			  var home_team = rows[i][5];
+			  var road_team = rows[i][8];
+			  var marker_text = home_team;
+			  var text = "<b>Player</b>: "+player+"<br /><b>From:</b> "+ home_team +"<br /><b>To:</b> "+road_team;
+			  calcRoute(end, start, transfer_color, text);
+			  smallMarker(getLatLng(end), road_team, transfer_color, 3.5);
+			  
+			  info_html = "<div>";
+			  //info_html += "<b>Team:</b> "+start;
+			  info_html += "</div>";
+			  addMarker(getLatLng(start), marker_text, info_html, transfer_color, 3.5);
+			 }
+          }
+        });
+	   }
+	  
+		function getTodayDate()
+		{
+			today=new Date(); // Initialize Date in raw form
+			date=today.getDate(); // Get the numerical date
+			year=today.getYear(); // Get the year
+			day = today.getDay(); // Get the day in number form (0,1,2,3,etc.)
+			month=today.getMonth()+1; // Get the month
+			
+			if (year<1900) year=(year+1900)
+			else if (year>2000) year=year;
+			
+			// Add suffix to date (1st, 2nd, 4th, etc.)
+			if (date==1) suffix=("st");
+			else if (date==2) suffix=("nd");
+			else if (date==3) suffix=("rd");
+			else if (date==21) suffix=("st");
+			else if (date==22) suffix=("nd");
+			else if (date==23) suffix=("rd");
+			else if (date==31) suffix=("st");
+			else suffix=("th");
+			
+			// Make month number correspond to month name
+			if (month==1) monthName=("January");
+			else if (month==2) monthName=("February");
+			else if (month==3) monthName=("March");
+			else if (month==4) monthName=("April");
+			else if (month==5) monthName=("May");
+			else if (month==6) monthName=("June");
+			else if (month==7) monthName=("July");
+			else if (month==8) monthName=("August");
+			else if (month==9) monthName=("September");
+			else if (month==10) monthName=("October");
+			else if (month==11) monthName=("November");
+			else monthName=("December");
+			
+			if (day==0) dayName =("Sunday");
+			else if (day==1) dayName=("Monday");
+			else if (day==2) dayName=("Tuesday");
+			else if (day==3) dayName=("Wednesday");
+			else if (day==4) dayName=("Thursday");
+			else if (day==5) dayName=("Friday");
+			else if (day==6) dayName=("Saturday");
+			
+			//$("span#date").text(dayName + ", " + monthName +" "+ date + ", " + year);
+			//$("span#date").text(getStrDate());
+			
+		}
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+  
+    <!--<div id="map_title"><span class="map_title_style">The Geography of College Basketball</span><br /><span id="date"></span></div>-->
+    <div id="left_nav">
+    	<span class="map_title_style">
+    		The Geography of College Basketball
+        </span><br /><br />
+    	<div id="datepicker"></div>
+    </div>
+    <div id="map_footer"><a href="map/all_arenas.html">All NCAA Division I College Basketball Arenas</a></div>
+    <div id="map_canvas"></div>
+  </body>
+  
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39180812-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
+

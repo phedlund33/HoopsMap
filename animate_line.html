@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+	<!-- THE DATA TO BE GEOCODED: -->
+	<link href="style/map_01.css" rel="stylesheet">
+    <style type="text/css">
+		#map_footer {
+			background: #fff;
+			padding: 5px;
+			border: 1px solid #ccc;
+			box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+			display: none;
+		}
+		#map_footer a{font-size: 12px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+    </style>
+	<script>
+	var map;
+	var markersArray = [];
+	var linesArray = [];
+	var arena_color = "#fecc5c";
+	var arena_outline = "#bd0026";
+	var line_color = "#006837";
+	var player_color = "#c2e699";
+	var player_outline = "#006837";
+	var interval;
+	var call_interval;
+	function initialize() {
+		$("#map_footer").click(function() {
+			markAllSchools();
+		});
+		var myLatlng = new google.maps.LatLng(38,-79);
+		var mapOptions = {
+			zoom: 4,
+			streetViewControl: false,
+			panControl: false,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.LARGE,
+				position: google.maps.ControlPosition.TOP_LEFT
+			},
+			center: myLatlng
+		};	
+		map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+		var style = [
+        {
+          featureType: 'all',
+          elementType: 'all',
+          stylers: [
+            { saturation: -50 }
+          ]
+        },
+		{
+			featureType: "landscape",
+   			 elementType: "geometry.fill",
+			stylers: [
+			  { hue: "#ff9900" },
+			  { saturation: -47 }
+			]
+		  },
+        {
+          featureType: 'poi',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'all',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        }
+      ];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+		
+		var control = document.getElementById('map_footer');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.BOTTOM].push(control);
+		
+		var start = new google.maps.LatLng(47.845192,-120.011585); //Set to whatever lat/lng you need for your departure location
+		var end = new google.maps.LatLng(38.028081,-78.527634); //Set to whatever lat/lng you need for your arrival location
+		markAllSchools();
+		//addMarker(end, 'Virginia');
+		
+		
+	}
+	function markAllSchools(){
+		 clearMyMarkers();
+        var query = "SELECT SCHOOL, SCHOOL_LATLON FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I GROUP BY SCHOOL, SCHOOL_LATLON";
+        var encodedQuery = encodeURIComponent(query);
+
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				
+				for (var i in rows) {
+					var school = rows[i][0];
+					addMarker(getLatLng(rows[i][1]), school);
+				}
+			}
+			
+        });
+	}
+	function addMarker(location, school)
+	{
+		var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				  icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.6,
+					fillColor: arena_color,
+					strokeOpacity: 0.9,
+					strokeColor: arena_outline,
+					strokeWeight: 1.5, 
+					scale: 4 //pixels
+				  },
+				 title:school
+			  });	
+			markersArray.push(marker);
+		   google.maps.event.addListener(marker, 'click', function() {
+				getPlayers(school, location);
+		});
+	
+	}
+	function addPlayerMarker(location, name)
+	{
+		var marker = new google.maps.Marker({
+				  position: location,
+				  map: map,
+				  icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					fillOpacity: 0.6,
+					fillColor: player_color,
+					strokeOpacity: 0.9,
+					strokeColor: player_outline,
+					strokeWeight: 1.0, 
+					scale: 3.5 //pixels
+				  },
+				 title:name
+			  });	
+			markersArray.push(marker);
+		   	
+	}
+	function getPlayers(school, location)
+	{
+	    clearMyMarkers();
+		addMarker(location, school);
+		var query = "SELECT NAME, PLAYER_LATLON FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I WHERE SCHOOL='"+school+"'";
+		
+        var encodedQuery = encodeURIComponent(query);
+
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				
+				for (var i in rows) {
+					var player = rows[i][0];
+					var player_home = rows[i][1];
+					
+					animateLine(getLatLng(player_home), location, player);
+					
+					
+				}
+				
+				
+			}
+			
+        });
+	}
+	function animateLineANIMATE(start, end, player)
+	{
+		//get lines from google fusion table
+		var departure = start;
+		var arrival = end;
+		
+		
+		var line = new google.maps.Polyline({
+			  path: [departure, departure],
+			  strokeColor: line_color,
+			  strokeOpacity: 1,
+			  strokeWeight: 1,
+			  geodesic: true, //set to false if you want straight line instead of arc
+			  map: map,
+		});
+		var step = 0;
+		var numSteps = 250; //Change this to set animation resolution
+		var timePerStep = 5; //Change this to alter animation speed
+		interval = setInterval(function() {
+			 step += 1;
+			 if (step > numSteps) {
+				 clearInterval(interval);
+			 } else {
+				 var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure,arrival,step/numSteps);
+				 line.setPath([departure, are_we_there_yet]);
+			 }
+		}, timePerStep);
+		linesArray.push(line);
+		addPlayerMarker(start, player);
+	}
+	function animateLine(start, end, player)
+	{
+		//get lines from google fusion table
+		var departure = start;
+		var arrival = end;
+		
+		
+		var line = new google.maps.Polyline({
+			  path: [start, end],
+			  strokeColor: line_color,
+			  strokeOpacity: 1,
+			  strokeWeight: 1,
+			  geodesic: true, //set to false if you want straight line instead of arc
+			  map: map,
+		});
+		
+		linesArray.push(line);
+		addPlayerMarker(start, player);
+	}
+	function clearMyMarkers(){
+		clearInterval(interval);
+	//alert("start to clear markers...");
+		if (markersArray) {
+			for (i in markersArray) {
+				markersArray[i].setMap(null);
+				}
+			markersArray = [];
+		} 
+		if (linesArray) {
+			for (i in linesArray) {
+				linesArray[i].setMap(null);
+			}
+			linesArray = [];
+		} 
+	 }
+	 function getLatLng(coord)
+	  {
+		var coordinates = coord.split(",");
+        var lat = parseFloat(coordinates[0]);
+        var lon = parseFloat(coordinates[1]);
+        var myLatLng = new google.maps.LatLng(lat,lon);
+		
+		return myLatLng;
+		
+	  }
+	google.maps.event.addDomListener(window, 'load', initialize);
+	 </script>
+  </head>
+  <body>
+    <div id='map_canvas'></div>
+	<div id="map_footer"><span id='reset'>RESET</span></div>
+   
+  </body>
+</html>

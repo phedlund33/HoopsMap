@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AAC_2014" id="AAC_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>AAC_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AAC_2014">
+		<SimpleData name="ID">177</SimpleData>
+		<SimpleData name="SCHOOL">St. Peter's</SimpleData>
+		<SimpleData name="CONFERENCE">MAAC</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">40.727648000000002</SimpleData>
+		<SimpleData name="LON">-74.073172999999997</SimpleData>
+		<SimpleData name="ARENA NAME">Yanitelli Center</SimpleData>
+		<SimpleData name="ARENA CAPA">3200</SimpleData>
+		<SimpleData name="ARENA OPEN">1975</SimpleData>
+		<SimpleData name="FULL NAME">Saint Peter's Peacocks</SimpleData>
+		<SimpleData name="area">221.188186099577710</SimpleData>
+		<SimpleData name="perim">62.478380570527747</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-82.406472,28.059236 -95.346944,29.724722 -96.780556,32.840278 -95.941944,36.148611 -79.038026,43.137035 -73.754722,42.648611 -72.254376,41.805238 -81.1976,28.6068 -82.406472,28.059236</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AtlanticSun_2014" id="AtlanticSun_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>AtlanticSun_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AtlanticSun_2014">
+		<SimpleData name="ID">51</SimpleData>
+		<SimpleData name="SCHOOL">Kennesaw State</SimpleData>
+		<SimpleData name="CONFERENCE">Atlantic Sun</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">34.036923999999999</SimpleData>
+		<SimpleData name="LON">-84.580329000000006</SimpleData>
+		<SimpleData name="ARENA NAME">KSU Convocation Center</SimpleData>
+		<SimpleData name="ARENA CAPA">4800</SimpleData>
+		<SimpleData name="FULL NAME">Kennesaw State Owls</SimpleData>
+		<SimpleData name="area">31.079513943220263</SimpleData>
+		<SimpleData name="perim">27.963505446116280</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-81.764722,26.471111 -86.798836,36.103833 -84.458864,39.032273 -81.968774,34.996696 -81.301819,29.039584 -81.764722,26.471111</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

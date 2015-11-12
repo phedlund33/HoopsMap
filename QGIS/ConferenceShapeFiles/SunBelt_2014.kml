@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="SunBelt_2014" id="SunBelt_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>SunBelt_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#SunBelt_2014">
+		<SimpleData name="ID">323</SimpleData>
+		<SimpleData name="SCHOOL">Texas State</SimpleData>
+		<SimpleData name="CONFERENCE">Sun Belt</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">29.888611000000001</SimpleData>
+		<SimpleData name="LON">-97.932777999999999</SimpleData>
+		<SimpleData name="ARENA NAME">Strahan Coliseum</SimpleData>
+		<SimpleData name="ARENA CAPA">7200</SimpleData>
+		<SimpleData name="ARENA OPEN">1982</SimpleData>
+		<SimpleData name="FULL NAME">Texas State Bobcats</SimpleData>
+		<SimpleData name="area">70.399778368556099</SimpleData>
+		<SimpleData name="perim">39.319933637884610</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-97.932778,29.888611 -97.107972,32.730586 -90.670319,35.845422 -81.675952,36.210624 -81.779147,32.427644 -88.17975,30.69229 -92.039056,30.218444 -97.932778,29.888611</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

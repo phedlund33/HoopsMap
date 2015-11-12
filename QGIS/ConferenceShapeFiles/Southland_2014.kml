@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Southland_2014" id="Southland_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>Southland_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Southland_2014">
+		<SimpleData name="ID">306</SimpleData>
+		<SimpleData name="SCHOOL">Southeastern Louisiana</SimpleData>
+		<SimpleData name="CONFERENCE">Southland</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">30.520000000000000</SimpleData>
+		<SimpleData name="LON">-90.472778000000005</SimpleData>
+		<SimpleData name="ARENA NAME">University Center</SimpleData>
+		<SimpleData name="ARENA CAPA">7500</SimpleData>
+		<SimpleData name="ARENA OPEN">1982</SimpleData>
+		<SimpleData name="FULL NAME">Southeastern Louisiana Lions</SimpleData>
+		<SimpleData name="area">41.775110547243685</SimpleData>
+		<SimpleData name="perim">26.201566036391341</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-97.393403644045591,27.807187059458599 -98.469441,29.468185 -99.709266,32.470369 -92.459444,35.081667 -90.050556,30.03 -90.801283,29.792346 -97.393403644045591,27.807187059458599</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

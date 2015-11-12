@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="BigSky_2014" id="BigSky_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>BigSky_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#BigSky_2014">
+		<SimpleData name="ID">340</SimpleData>
+		<SimpleData name="SCHOOL">Idaho</SimpleData>
+		<SimpleData name="CONFERENCE">Big Sky</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">46.726388999999998</SimpleData>
+		<SimpleData name="LON">-117.018056000000000</SimpleData>
+		<SimpleData name="ARENA NAME">Kibbie Dome</SimpleData>
+		<SimpleData name="ARENA CAPA">7000</SimpleData>
+		<SimpleData name="ARENA OPEN">1975</SimpleData>
+		<SimpleData name="FULL NAME">Idaho Vandals</SimpleData>
+		<SimpleData name="area">202.897735311169750</SimpleData>
+		<SimpleData name="perim">62.805671442285984</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-111.6525,35.1805 -121.426831,38.561879 -122.687471,45.510987 -117.589167,47.491111 -97.07247,47.92767 -104.703097,40.402251 -111.6525,35.1805</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

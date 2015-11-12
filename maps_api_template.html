@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+	<script src="script/geo.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script type="text/javascript" language="javascript" src="script/jquery.dataTables.js"></script>
+	
+	<link href="style/map_01.css" rel="stylesheet">
+	<link rel="icon" 
+      type="image/png" 
+      href="images/Basketball.png" />
+	<style type="text/css" title="currentStyle">
+			@import "style/jquery.dataTables.css";
+	</style>
+    <style type="text/css">
+		#map_footer {
+			background: #fff;
+			padding: 5px;
+			border: 1px solid #ccc;
+			box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+			display: none;
+		}
+		#cover-div {
+			position:absolute;
+			left:10px;
+			top: 10px;
+			z-index:3;
+			/*background: #fff;*/
+			background-color:rgba(255,255,255,0.5);
+			padding: 5px;
+			font-size: 13px;
+			font-family: Arial;
+			border: 1px solid #ccc;
+			box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+		#cover-div .title{
+			color: #930;
+			font-size: 20px;
+		}
+		#footer{
+			margin-top: 5px;
+			border-top: 2 px solid #930;
+			color: #930;
+			font-size: 20px;
+		}
+		#close-me{
+			font-weight: bold;
+		}
+		.faux-link{
+			text-decoration: underline;
+			cursor: pointer;
+		}
+		#map_footer a{font-size: 22px; font-family:Tahoma, Geneva, sans-serif;}
+	  	#map_footer a:link {color:#C60;}
+		#map_footer a:visited {color:#C60;}
+		#map_footer a:hover { text-decoration: none; color:#C90 }
+		
+			#players-table{
+			margin-top: 5px;
+			margin-bottom: 5px;
+			
+			width: 370px;
+			
+	
+		}
+		#players{
+			border-collapse:collapse;
+			border: 1px solid #CCC;
+			
+		}
+		#players-table td {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 11px;
+			text-align: left;
+			border: 1px solid #CCC;
+			padding: 1px;
+		}
+		#players-table th {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 11px;
+			text-align: left;
+			border: 1px solid #CCC;
+		}
+		#players-table tr:hover {
+			cursor: pointer;
+			background-color:#FFC;
+		}
+		#players-table tr:nth-child(odd)		{ background-color:#eee; }
+		#players-table tr:nth-child(even)		{ background-color:#fff; }
+		
+    </style>
+	<script>
+	var map;
+	
+	function initialize() {
+		
+		
+		var myLatlng = new google.maps.LatLng(38,-79);
+		var mapOptions = {
+			zoom: 4,
+			streetViewControl: false,
+			panControl: false,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.SMALL,
+				position: google.maps.ControlPosition.TOP_RIGHT
+			},
+			center: myLatlng
+		};	
+		map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+		var style = [
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 65
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 51
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 30
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 40
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.province",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": -25
+            },
+            {
+                "saturation": -100
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ffff00"
+            },
+            {
+                "lightness": -25
+            },
+            {
+                "saturation": -97
+            }
+        ]
+    }
+];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+		
+		
+		var control = document.getElementById('map_footer');
+        control.style.display = 'block';
+        map.controls[google.maps.ControlPosition.BOTTOM].push(control);
+		
+		var start = new google.maps.LatLng(47.845192,-120.011585); //Set to whatever lat/lng you need for your departure location
+		var end = new google.maps.LatLng(38.028081,-78.527634); //Set to whatever lat/lng you need for your arrival location
+		loadData();
+		
+		
+		
+	}
+	function loadData(){
+		
+        var query = "SELECT * FROM 1OOUwT836S2Ry8y4mvaSUg5za8hBniwxjBArB1Cs";
+        var encodedQuery = encodeURIComponent(query);
+
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				
+				for (var i in rows) {
+					var school = rows[i][4];
+					console.log(school);
+				}
+			}
+			
+        });
+	}
+	function getLatLng(coord)
+	  {
+		var coordinates = coord.split(",");
+        var lat = parseFloat(coordinates[0]);
+        var lon = parseFloat(coordinates[1]);
+        var myLatLng = new google.maps.LatLng(lat,lon);
+		
+		return myLatLng;
+		
+	 }
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+	 </script>
+  </head>
+  <body>
+    <div id='map_canvas'></div>
+	<div id="map_footer"></div>
+   
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+  <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type='text/javascript'>
+     google.load('visualization', '1', {'packages': ['geochart']});
+     google.setOnLoadCallback(loadData);
+
+      function drawMarkersMap(data) {
+
+      var options = {
+        region: 'US',
+        displayMode: 'markers',
+		resolution: 'provinces',
+		markerOpacity: 0.7,
+		 colorAxis: {colors: ['yellow', 'red']}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
+	function loadData(){
+		var dt_lat;
+		var dt_lon;
+		var dt = new google.visualization.DataTable();
+		
+		dt.addColumn('number','Latitude');
+		dt.addColumn('number','Longitude');
+		dt.addColumn('string', 'City');
+		dt.addColumn('number', 'Players');
+		
+        var query = "SELECT PLAYER_LATLON, CITY, HOME_COUNT FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I GROUP BY PLAYER_LATLON, CITY, HOME_COUNT";
+		//var query = "SELECT HOME, PLAYER_LATLON, HOME_COUNT FROM 1ZoXocGser9yQ9h51_aJk4Bst8Ht6IzFJK8qC83I GROUP BY HOME, PLAYER_LATLON, HOME_COUNT ORDER BY HOME_COUNT DESC";
+        var encodedQuery = encodeURIComponent(query);
+
+        var url = ['https://www.googleapis.com/fusiontables/v1/query'];
+        url.push('?sql=' + encodedQuery);
+        url.push('&key=AIzaSyAHmvVu_aQhPJvFJVfP7siInlAblO4lTus');
+        url.push('&callback=?');
+
+        $.ajax({
+			url: url.join(''),
+			dataType: 'jsonp',
+			success: function (data) {
+				var rows = data['rows'];
+				var total_rows = rows.length;
+				dt.addRows(total_rows);
+				for (var i in rows) {
+					
+					dt_lat = getLatLon('lat', rows[i][0]);
+					dt_lon = getLatLon('lng', rows[i][0]);
+				
+					dt.setValue(Number(i), 0, dt_lat);
+					dt.setValue(Number(i), 1, dt_lon);
+					dt.setValue(Number(i), 2, rows[i][1]);
+					dt.setValue(Number(i), 3, rows[i][2]);
+					
+
+				}
+
+			drawMarkersMap(dt);
+			
+			}
+			
+        });
+		
+	}
+	function getLatLon(which, lat_lon)
+	{
+		var coordinates = lat_lon.split(",");
+        if(which == "lat")
+		{
+			return coordinates[0];
+		}
+		else
+		{
+			return coordinates[1];
+		}
+	}
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%; height: 100%;"></div>
+  </body>
+</html>

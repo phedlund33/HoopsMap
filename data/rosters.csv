@@ -1,0 +1,505 @@
+Cincinnati,CINCY,cincinnati-bearcats
+Connecticut,UCONN,connecticut-huskies
+Houston,HOU,houston-cougars
+Louisville,LVILLE,louisville-cardinals
+Memphis,MEMP,memphis-tigers
+Rutgers,RUT,rutgers-scarlet-knights
+South Florida,SFLA,south-florida-bulls
+Southern Methodist,SMU,southern-methodist-mustangs
+Temple,TEMPLE,temple-owls
+UCF,UCF,ucf-knights
+Albany,ALBANY,albany-great-danes
+Binghamton,BING,binghamton-bearcats
+Hartford,HARTFD,hartford-hawks
+Maine,MAINE,maine-black-bears
+Maryland-Baltimore County,UMBC,maryland-baltimore-county-retrievers
+New Hampshire,NH,new-hampshire-wildcats
+Stony Brook,STNYBRK,stony-brook-seawolves
+UMass-Lowell,MASLOW,umass-lowell-river-hawks
+Vermont,UVM,vermont-catamounts
+Boston College,BC,boston-college-eagles
+Clemson,CLEM,clemson-tigers
+Duke,DUKE,duke-blue-devils
+Florida State,FSU,florida-state-seminoles
+Georgia Tech,GATECH,georgia-tech-yellow-jackets
+Maryland,MD,maryland-terrapins
+Miami (Fla.),MIAMI,miami-fla-hurricanes
+North Carolina State,NCST,north-carolina-state-wolfpack
+North Carolina,UNC,north-carolina-tar-heels
+Notre Dame,ND,notre-dame-fighting-irish
+Pittsburgh,PITT,pittsburgh-panthers
+Syracuse,CUSE,syracuse-orange
+Virginia,UVA,virginia-cavaliers
+Virginia Tech,VATECH,virginia-tech-hokies
+Wake Forest,WAKE,wake-forest-demon-deacons
+E. Tennessee State,ETNST,e-tennessee-state-buccaneers
+Florida Gulf Coast,FGC,florida-gulf-coast-eagles
+Jacksonville,JVILLE,jacksonville-dolphins
+Kennesaw State,KENSAW,kennesaw-state-owls
+Lipscomb,LPSCMB,lipscomb-bison
+Mercer,MERCER,mercer-bears
+North Florida,UNF,north-florida-ospreys
+Northern Kentucky,NKY,northern-kentucky
+South Carolina Upstate,USCUP,south-carolina-upstate-spartans
+Stetson,STETSON,stetson-hatters
+Dayton,DAYTON,dayton-flyers
+Duquesne,DUQ,duquesne-dukes
+Fordham,FORD,fordham-rams
+George Mason,GMASON,george-mason-patriots
+George Washington,GWASH,george-washington-colonials
+La Salle,LSALLE,la-salle-explorers
+Massachusetts,UMASS,massachusetts-minutemen
+Rhode Island,RI,rhode-island-rams
+Richmond,RICH,richmond-spiders
+Saint Joseph's,STJOES,saint-josephs-hawks
+Saint Louis,STLOU,saint-louis-billikens
+St. Bonaventure,STBON,st-bonaventure-bonnies
+Virginia Commonwealth,VCU,virginia-commonwealth-rams
+Butler,BUTLER,butler-bulldogs
+Creighton,CREIGH,creighton-bluejays
+DePaul,DEPAUL,depaul-blue-demons
+Georgetown,GTOWN,georgetown-hoyas
+Marquette,MARQET,marquette-golden-eagles
+Providence,PROV,providence-friars
+Seton Hall,SETON,seton-hall-pirates
+St. John's,STJOHN,st-johns-red-storm
+Villanova,NOVA,villanova-wildcats
+Xavier,XAVIER,xavier-musketeers
+Eastern Washington,EWASH,eastern-washington-eagles
+Idaho State,IDST,idaho-state-bengals
+Montana,MNTNA,montana-grizzlies
+Montana State,MONST,montana-state-bobcats
+North Dakota,NDAK,north-dakota-fighting-sioux
+Northern Arizona,NAU,northern-arizona-lumberjacks
+Northern Colorado,NCOLO,northern-colorado-bears
+Portland State,PORTST,portland-state-vikings
+Sacramento State,SACST,sacramento-state-hornets
+Southern Utah,SUTAH,southern-utah-thunderbirds
+Weber State,WEBER,weber-state-wildcats
+Charleston Southern,CHARSO,charleston-southern-buccaneers
+Coastal Carolina,CSTCAR,coastal-carolina-chanticleers
+Gardner-Webb,GWEBB,gardner-webb-bulldogs
+NC-Asheville,NCASHV,nc-asheville-bulldogs
+Presbyterian,PRESBY,presbyterian-blue-hose
+Winthrop,WINTHR,winthrop-eagles
+Campbell,CAMP,campbell-fighting-camels
+High Point,HIGHPT,high-point-panthers
+Liberty,LIB,liberty-flames
+Longwood,LONGWD,longwood-lancers
+Radford,RADFRD,radford-highlanders
+VMI,VMI,vmi-keydets
+Illinois,ILL,illinois-fighting-illini
+Indiana,IND,indiana-hoosiers
+Iowa,IOWA,iowa-hawkeyes
+Michigan State,MICHST,michigan-state-spartans
+Michigan,MICH,michigan-wolverines
+Minnesota,MINN,minnesota-golden-gophers
+Nebraska,NEB,nebraska-cornhuskers
+Northwestern,NWEST,northwestern-wildcats
+Ohio State,OHIOST,ohio-state-buckeyes
+Penn State,PSU,penn-state-nittany-lions
+Purdue,PURDUE,purdue-boilermakers
+Wisconsin,WISC,wisconsin-badgers
+Baylor,BAYLOR,baylor-bears
+Iowa State,IOWAST,iowa-state-cyclones
+Kansas,KANSAS,kansas-jayhawks
+Kansas State,KSTATE,kansas-state-wildcats
+Oklahoma,OKLA,oklahoma-sooners
+Oklahoma State,OKLAST,oklahoma-state-cowboys
+TCU,TCU,tcu-horned-frogs
+Texas,TEXAS,texas-longhorns
+Texas Tech,TXTECH,texas-tech-red-raiders
+West Virginia,WVU,west-virginia-mountaineers
+Cal Poly,CPOLY,cal-poly-mustangs
+Cal State Fullerton,CSFULL,cal-state-fullerton-titans
+California Davis,UCDAV,california-davis-aggies
+California Irvine,UCIRV,california-irvine-anteaters
+California Riverside,UCRIV,california-riverside-highlanders
+Hawaii,HAWAII,hawaii-warriors
+Long Beach State,LNGBCH,long-beach-state-49ers
+Northridge,CSN,northridge-matadors
+Santa Barbara,UCSB,santa-barbara-gauchos
+College of Charleston,CHARLS,college-of-charleston-cougars
+Delaware,DEL,delaware-fightin-blue-hens
+Drexel,DREXEL,drexel-dragons
+Hofstra,HOFSTRA,hofstra-pride
+James Madison,JMAD,james-madison-dukes
+NC-Wilmington,NCWILM,nc-wilmington-seahawks
+Northeastern,NEAST,northeastern-huskies
+Towson,TOWSON,towson-tigers
+William & Mary,WMMARY,william-mary-tribe
+Charlotte,CHARLO,charlotte-49ers
+East Carolina,ECU,east-carolina-pirates
+Florida Atlantic,FAU,florida-atlantic-owls
+Florida International,FIU,florida-international-golden-panthers
+Louisiana Tech,LATECH,louisiana-tech-bulldogs
+Marshall,MRSHL,marshall-thundering-herd
+Middle Tennessee,MTSU,middle-tennessee-blue-raiders
+North Texas,NTEXAS,north-texas-mean-green
+Old Dominion,ODU,old-dominion-monarchs
+Rice,RICE,rice-owls
+Southern Miss,USM,southern-miss-golden-eagles
+Texas-El Paso,UTEP,texas-el-paso-miners
+Texas-San Antonio,TXSA,texas-san-antonio-roadrunners
+Tulane,TULANE,tulane-green-wave
+Tulsa,TULSA,tulsa-golden-hurricane
+UAB,UAB,uab-blazers
+Cleveland State,CLEVST,cleveland-state-vikings
+Detroit,DTROIT,detroit-titans
+Green Bay,WISGB,green-bay-phoenix
+Illinois-Chicago,ILLCHI,illinois-chicago-flames
+Oakland,OAK,oakland-golden-grizzlies
+Valparaiso,VALPO,valparaiso-crusaders
+Wisconsin-Milwaukee,MILW,wisconsin-milwaukee-panthers
+Wright State,WRIGHT,wright-state-raiders
+Youngstown State,YOUNG,youngstown-state-penguins
+New Jersey Tech,NJTECH,new-jersey-tech-highlanders
+Brown,BROWN,brown-bears
+Columbia,CLMB,columbia-lions
+Cornell,CORN,cornell-big-red
+Dartmouth,DART,dartmouth-big-green
+Harvard,HARV,harvard-crimson
+Pennsylvania,PENN,pennsylvania-quakers
+Princeton,PRINCE,princeton-tigers
+Yale,YALE,yale-bulldogs
+Canisius,CAN,canisius-golden-griffins
+Fairfield,FAIR,fairfield-stags
+Iona,IONA,iona-gaels
+Manhattan,MANH,manhattan-jaspers
+Marist,MARIST,marist-red-foxes
+Monmouth,MNMTH,monmouth-hawks
+Niagara,NIAGARA,niagara-purple-eagles
+Quinnipiac,QUINN,quinnipiac-bobcats
+Rider,RIDER,rider-broncs
+Siena,SIENA,siena-saints
+St. Peter's,STPETE,st-peters-peacocks
+Akron,AKRON,akron-zips
+Bowling Green,BGREEN,bowling-green-falcons
+Buffalo,BUFF,buffalo-bulls
+Kent State,KENTST,kent-state-golden-flashes
+Miami (Ohio),MIAOH,miami-ohio-redhawks
+Ohio,OHIO,ohio-bobcats
+Ball State,BALLST,ball-state-cardinals
+Central Michigan,CMICH,central-michigan-chippewas
+Eastern Michigan,EMICH,eastern-michigan-eagles
+Northern Illinois,NILL,northern-illinois-huskies
+Toledo,TOLEDO,toledo-rockets
+Western Michigan,WMICH,western-michigan-broncos
+Bethune-Cookman,BCU,bethune-cookman-wildcats
+Coppin State,COPPST,coppin-state-eagles
+Delaware State,DELST,delaware-state-hornets
+Florida A&M,FAMU,florida-am-rattlers
+Hampton,HAMP,hampton-pirates
+Howard,HOW,howard-bison
+Maryland-Eastern Shore,UMES,maryland-eastern-shore-hawks
+Morgan State,MORGAN,morgan-state-bears
+Norfolk State,NORFLK,norfolk-state-spartans
+North Carolina A&T,NCAT,north-carolina-at-aggies
+North Carolina Central,NCCU,north-carolina-central-eagles
+Savannah State,SAV,savannah-state-tigers
+South Carolina State,SCST,south-carolina-state-bulldogs
+Bradley,BRAD,bradley-braves
+Drake,DRAKE,drake-bulldogs
+Evansville,EVAN,evansville-aces
+Illinois State,ILLST,illinois-state-redbirds
+Indiana State,INDST,indiana-state-sycamores
+Loyola-Chicago,LOYCHI,loyola-chicago-ramblers
+Missouri State,MOST,missouri-state-bears
+Northern Iowa,NIOWA,northern-iowa-panthers
+Southern Illinois,SILL,southern-illinois-salukis
+Wichita State,WICHST,wichita-state-shockers
+Air Force,AF,air-force-falcons
+Boise State,BOISE,boise-state-broncos
+Colorado State,COLOST,colorado-state-rams
+Fresno State,FRESNO,fresno-state-bulldogs
+Nevada,NEVADA,nevada-wolf-pack
+New Mexico,NMEX,new-mexico-lobos
+San Diego State,SDGST,san-diego-state-aztecs
+San Jose State,SJST,san-jose-state-spartans
+UNLV,UNLV,unlv-rebels
+Utah State,UTAHST,utah-state-aggies
+Wyoming,WYO,wyoming-cowboys
+Bryant University,BRYANT,bryant-university-bulldogs
+Central Connecticut State,CCTST,central-connecticut-state-blue-devils
+Fairleigh Dickinson,FDU,fairleigh-dickinson-knights
+LIU-Brooklyn,LIU,liu-brooklyn-blackbirds
+Mount St. Mary's,MOUNT,mount-st-marys-mountaineers
+Robert Morris,ROBERT,robert-morris-colonials
+Sacred Heart,SACHRT,sacred-heart-pioneers
+St. Francis (N.Y.),STFRAN,st-francis-ny-terriers
+St. Francis (Pa.),SFTRPA,st-francis-pa-red-flash
+Wagner,WAGNER,wagner-seahawks
+Belmont,BELMONT,belmont-bruins
+Eastern Kentucky,EKY,eastern-kentucky-colonels
+Jacksonville State,JAXST,jacksonville-state-gamecocks
+Morehead State,MOREHD,morehead-state-eagles
+Tennessee State,TNST,tennessee-state-tigers
+Tennessee Tech,TNTECH,tennessee-tech-golden-eagles
+Austin Peay,PEAY,austin-peay-governors
+Eastern Illinois,EILL,eastern-illinois-panthers
+Murray State,MURYST,murray-state-racers
+SIU-Edwardsville,SIUE,siu-edwardsville-cougars
+Southeast Missouri State,SEMO,southeast-missouri-state-redhawks
+Tennessee-Martin,TNMART,tennessee-martin-skyhawks
+Arizona State,ARIZST,arizona-state-sun-devils
+Arizona,ARIZ,arizona-wildcats
+California,CAL,california-golden-bears
+Colorado,COLO,colorado-buffaloes
+Oregon,OREG,oregon-ducks
+Oregon State,OREGST,oregon-state-beavers
+Southern California,USC,southern-california-trojans
+Stanford,STNFRD,stanford-cardinal
+UCLA,UCLA,ucla-bruins
+Utah,UTAH,utah-utes
+Washington,WASH,washington-huskies
+Washington State,WASHST,washington-state-cougars
+American,AMER,american-eagles
+Army,ARMY,army-black-knights
+Boston University,BU,boston-university-terriers
+Bucknell,BUCK,bucknell-bison
+Colgate,COLG,colgate-raiders
+Holy Cross,HOLY,holy-cross-crusaders
+Lafayette,LAFAY,lafayette-leopards
+Lehigh,LEHIGH,lehigh-mountain-hawks
+Loyola-Maryland,LOYMD,loyola-maryland-greyhounds
+Navy,NAVY,navy-midshipmen
+Alabama,BAMA,alabama-crimson-tide
+Arkansas,ARK,arkansas-razorbacks
+Auburn,AUBURN,auburn-tigers
+Florida,FLA,florida-gators
+Georgia,UGA,georgia-bulldogs
+Kentucky,UK,kentucky-wildcats
+LSU,LSU,lsu-tigers
+Mississippi State,MISSST,mississippi-state-bulldogs
+Missouri,MIZZOU,missouri-tigers
+Ole Miss,MISS,ole-miss-rebels
+South Carolina,SC,south-carolina-gamecocks
+Tennessee,TENN,tennessee-volunteers
+Texas A&M,TEXAM,texas-am-aggies
+Vanderbilt,VANDY,vanderbilt-commodores
+Appalachian State,APPST,appalachian-state-mountaineers
+Chattanooga,CHATT,chattanooga-mocs
+Davidson,DAVID,davidson-wildcats
+Elon,ELON,elon-phoenix
+Furman,FURMAN,furman-paladins
+Georgia Southern,GASOU,georgia-southern-eagles
+NC-Greensboro,NCGRN,nc-greensboro-spartans
+Samford,SAMFORD,samford-bulldogs
+The Citadel,CIT,the-citadel-bulldogs
+Western Carolina,WCAR,western-carolina-catamounts
+Wofford,WOFF,wofford-terriers
+Abilene Christian,ABIL,abilene-christian-wildcats
+Central Arkansas,CARK,central-arkansas-bears
+Houston Baptist,HOUBP,houston-baptist-huskies
+Incarnate Word,UIW,incarnate-word-cardinals
+Lamar,LAMAR,lamar-cardinals
+McNeese State,MCNSE,mcneese-state-cowboys
+New Orleans,NORL,new-orleans-privateers
+Nicholls State,NICHST,nicholls-state-colonels
+Northwestern State,NWST,northwestern-state-demons
+Oral Roberts,ORAL,oral-roberts-golden-eagles
+Sam Houston State,SAMHOU,sam-houston-state-bearkats
+Southeastern Louisiana,SELOU,southeastern-louisiana-lions
+Stephen F. Austin,SFA,stephen-f-austin-lumberjacks
+Texas A&M-Corpus Christi,TXAMCC,texas-am-corpus-christi-islanders
+Denver,DENVER,denver-pioneers
+IPFW,IPFW,ipfw-mastodons
+IUPUI,IUPUI,iupui-jaguars
+Nebraska Omaha,NEBOM,nebraska-omaha
+North Dakota State,NDAKST,north-dakota-state-bison
+South Dakota,SDAK,south-dakota-coyotes
+South Dakota State,SDAKST,south-dakota-state-jackrabbits
+Western Illinois,WILL,western-illinois-leathernecks
+Alabama A&M,ALAM,alabama-am-bulldogs
+Alabama State,ALST,alabama-state-hornets
+Alcorn State,ALCORN,alcorn-state-braves
+Arkansas-Pine Bluff,ARKPB,arkansas-pine-bluff-golden-lions
+Grambling,GRAM,grambling-tigers
+Jackson State,JACKST,jackson-state-tigers
+Mississippi Valley State,MVSU,mississippi-valley-state-delta-devils
+Prairie View A&M,PVAM,prairie-view-am-panthers
+Southern,STHRN,southern-jaguars
+Texas Southern,TEXSO,texas-southern-tigers
+Arkansas State,ARKST,arkansas-state-red-wolves
+Arkansas-Little Rock,ARKLR,arkansas-little-rock-trojans
+Georgia State,GAST,georgia-state-panthers
+Louisiana-Lafayette,LALAF,louisiana-lafayette-ragin-cajuns
+Louisiana-Monroe,LAMON,louisiana-monroe-warhawks
+South Alabama,SALAB,south-alabama-jaguars
+Texas State-San Marcos,TEXST,texas-state-san-marcos-bobcats
+Texas-Arlington,TXARL,texas-arlington-mavericks
+Troy,TROY,troy-trojans
+Western Kentucky,WKY,western-kentucky-hilltoppers
+Brigham Young,BYU,brigham-young-cougars
+Gonzaga,GONZAG,gonzaga-bulldogs
+Loyola Marymount,LOYMRY,loyola-marymount-lions
+Pacific,UOP,pacific-tigers
+Pepperdine,PEPPER,pepperdine-waves
+Portland,PORT,portland-pilots
+San Diego,USD,san-diego-toreros
+San Francisco,SANFRAN,san-francisco-dons
+Santa Clara,SNCLRA,santa-clara-broncos
+St. Mary's,MARYCA,st-marys-gaels
+Cal State Bakersfield,CSBAK,cal-state-bakersfield-roadrunners
+Chicago State,CHIST,chicago-state-cougars
+Grand Canyon,GC,grand-canyon-antelopes
+Idaho,IDAHO,idaho-vandals
+New Mexico State,NMEXST,new-mexico-state-aggies
+Seattle,SEATTLE,seattle-redhawks
+Texas-Pan American,TEXPA,texas-pCincinnati,CINCY,cincinnati-bearcats,10,Troy Caupain,G,6-3,200,Fr.,Midlothian, VA
+Cincinnati,CINCY,cincinnati-bearcats,0,Jeremiah Davis III,G,6-3,199,Soph.,Muncie, IN
+Cincinnati,CINCY,cincinnati-bearcats,14,Ge'Lawn Guyn,G,6-2,185,Jr.,Georgetown, KY
+Cincinnati,CINCY,cincinnati-bearcats,5,Justin Jackson,F,6-8,230,Sr.,Cocoa Beach, FL
+Cincinnati,CINCY,cincinnati-bearcats,25,Kevin Johnson,G,6-2,175,Fr.,Cincinnati, OH
+Cincinnati,CINCY,cincinnati-bearcats,23,Sean Kilpatrick,G,6-4,210,Sr.,Yonkers, NY
+Cincinnati,CINCY,cincinnati-bearcats,11,Jermaine Lawrence,F,6-9,205,Fr.,Springfield Gardens, NY
+Cincinnati,CINCY,cincinnati-bearcats,1,Deshaun Morman,G,6-3,190,Fr.,Richmond, VA
+Cincinnati,CINCY,cincinnati-bearcats,33,David Nyarsuk,C,7-1,250,Sr.,Juba, Sudan
+Cincinnati,CINCY,cincinnati-bearcats,2,Titus Rubles,F,6-7,220,Sr.,Dallas, TX
+Cincinnati,CINCY,cincinnati-bearcats,15,Jermaine Sanders,F,6-5,210,Jr.,Far Rockaway, NY
+Cincinnati,CINCY,cincinnati-bearcats,32,Jamaree Strickland,C,6-10,270,Fr.,Oakland, CA
+Cincinnati,CINCY,cincinnati-bearcats,3,Shaquille Thomas,F,6-7,205,Soph.,Paterson, NJ
+Cincinnati,CINCY,cincinnati-bearcats,45,Zack Tobler,F,6-5,215,Fr.,Fort Mitchell, KY
+Connecticut,UCONN,connecticut-huskies,11,Ryan Boatright,G,6-0,168,Jr.,Aurora, IL
+Connecticut,UCONN,connecticut-huskies,35,Amida Brimah,C,7-0,217,Fr.,Accra, Ghana
+Connecticut,UCONN,connecticut-huskies,21,Omar Calhoun,G,6-6,200,Soph.,Brooklyn, NY
+Connecticut,UCONN,connecticut-huskies,2,DeAndre Daniels,F,6-9,195,Jr.,Los Angeles, CA
+Connecticut,UCONN,connecticut-huskies,12,Kentan Facey,F,6-9,200,Fr.,Trelawny, Jamaica
+Connecticut,UCONN,connecticut-huskies,5,Niels Giffey,G-F,6-7,205,Sr.,Berlin, Germany
+Connecticut,UCONN,connecticut-huskies,20,Lasan Kromah,G-F,6-6,201,Sr.,Greenbelt, MD
+Connecticut,UCONN,connecticut-huskies,14,Pat Lenehan,G,6-3,181,Jr.,Middletown, CT
+Connecticut,UCONN,connecticut-huskies,13,Shabazz Napier,G,6-1,180,Sr.,Roxbury, MA
+Connecticut,UCONN,connecticut-huskies,0,Phillip Nolan,F,6-10,212,Soph.,Milwaukee, WI
+Connecticut,UCONN,connecticut-huskies,10,Tyler Olander,F,6-10,230,Sr.,Mansfield, CT
+Connecticut,UCONN,connecticut-huskies,44,Rodney Purvis,G,6-4,203,Soph.,Raleigh, NC
+Connecticut,UCONN,connecticut-huskies,3,Terrence Samuel,G,6-4,190,Fr.,Brooklyn, NY
+Connecticut,UCONN,connecticut-huskies,22,Leon Tolksdorf,F,6-8,218,Soph.,Berlin, Germany
+Connecticut,UCONN,connecticut-huskies,25,Tor Watts,G,6-1,202,Sr.,Brooklyn, NY
+Houston,HOU,houston-cougars,4,LeRon Barnes,G,6-6,195,Soph.,Stonewall, LA
+Houston,HOU,houston-cougars,25,Ahmed Hamdy,F-C,6-9,255,Fr.,Â 
+Houston,HOU,houston-cougars,23,Danuel House,G,6-7,195,Soph.,Sugar Land, TX
+Houston,HOU,houston-cougars,45,Valentine Izundu,C,6-10,215,Soph.,Houston, TX
+Houston,HOU,houston-cougars,12,Jimmie Jones,G,5-10,160,Sr.,Plano, TX
+Houston,HOU,houston-cougars,0,Danrad Knowles,F,6-10,190,Fr.,Houston, TX
+Houston,HOU,houston-cougars,1,Mikhail McLean,F,6-8,205,Jr.,Houston, TX
+Houston,HOU,houston-cougars,2,Brandon Morris,G,6-0,185,Sr.,Alexandria, LA
+Houston,HOU,houston-cougars,24,Lawrence Paye,G,6-0,185,Sr.,Houston, TX
+Houston,HOU,houston-cougars,55,J.J. Richardson,F,6-8,245,Sr.,Missouri City, TX
+Houston,HOU,houston-cougars,5,L.J. Rose,G,6-4,190,Soph.,Houston, TX
+Houston,HOU,houston-cougars,3,Jaaron Simmons,G,6-1,175,Fr.,Dayton, OH
+Houston,HOU,houston-cougars,21,Jherrod Stiggers,G,6-5,210,Soph.,Terrell, TX
+Houston,HOU,houston-cougars,35,TaShawn Thomas,F,6-8,215,Jr.,Killeen, TX
+Houston,HOU,houston-cougars,14,Tione Womack,G,6-1,170,Sr.,Baltimore, MD
+Louisville,LVILLE,louisville-cardinals,22,Akoy Agau,F,6-8,235,Fr.,Omaha, NE
+Louisville,LVILLE,louisville-cardinals,4,Dillon Avare,G,5-11,155,Fr.,Lexington, KY
+Louisville,LVILLE,louisville-cardinals,21,Chane Behanan,F,6-6,250,Jr.,Cincinnati, OH
+Louisville,LVILLE,louisville-cardinals,20,Wayne Blackshear,G-F,6-5,230,Jr.,Chicago, IL
+Louisville,LVILLE,louisville-cardinals,1,Anton Gill,G,6-4,180,Fr.,Raleigh, NC
+Louisville,LVILLE,louisville-cardinals,11,Luke Hancock,F,6-6,200,Sr.,Roanoke, VA
+Louisville,LVILLE,louisville-cardinals,24,Montrezl Harrell,F,6-8,235,Soph.,Tarboro, NC
+Louisville,LVILLE,louisville-cardinals,15,Tim Henderson,G,6-2,195,Sr.,Louisville, KY
+Louisville,LVILLE,louisville-cardinals,3,Chris Jones,G,5-10,175,Jr.,Memphis, TN
+Louisville,LVILLE,louisville-cardinals,23,David Levitch,G,6-3,190,Fr.,Goshen, KY
+Louisville,LVILLE,louisville-cardinals,12,Mangok Mathiang,F-C,6-10,200,Fr.,Melbourne, Australia
+Louisville,LVILLE,louisville-cardinals,0,Terry Rozier,G,6-1,170,Fr.,Cleveland, OH
+Louisville,LVILLE,louisville-cardinals,2,Russ Smith,G,6-0,165,Sr.,Brooklyn, NY
+Louisville,LVILLE,louisville-cardinals,44,Stephan Van Treese,F,6-9,245,Sr.,Indianapolis, IN
+Louisville,LVILLE,louisville-cardinals,5,Kevin Ware,G,6-2,175,Jr.,Bronx, NY
+Memphis,MEMP,memphis-tigers,35,Anthony Cole,G,6-1,193,Soph.,Arlington, TN
+Memphis,MEMP,memphis-tigers,10,Markel Crawford,G,6-4,187,Fr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,3,Chris Crawford,G,6-4,222,Sr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,11,Michael Dixon Jr.,G,6-1,200,Sr.,Kansas City, MO
+Memphis,MEMP,memphis-tigers,32,Trey Draper,G,5-10,170,Sr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,2,Shaq Goodwin,F,6-9,242,Soph.,Atlanta, GA
+Memphis,MEMP,memphis-tigers,23,Kuran Iverson,G-F,6-10,209,Fr.,Windsor, CT
+Memphis,MEMP,memphis-tigers,1,Joe Jackson,G,6-1,174,Sr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,55,Geron Johnson,G,6-3,197,Sr.,Dayton, OH
+Memphis,MEMP,memphis-tigers,5,Nick King,G-F,6-7,220,Fr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,42,Jake McDowell,G-F,6-6,196,Fr.,Memphis, TN
+Memphis,MEMP,memphis-tigers,4,Austin Nichols,F,6-8,212,Fr.,Collierville, TN
+Memphis,MEMP,memphis-tigers,12,David Pellom,F,6-7,224,Sr.,Wilmington, NC
+Memphis,MEMP,memphis-tigers,20,RaShawn Powell,G,6-1,170,Fr.,Orlando, FL
+Memphis,MEMP,memphis-tigers,14,Hippolyte Tsafack,F,6-8,242,Jr.,Yaounde, Cameroon
+Memphis,MEMP,memphis-tigers,0,Damien Wilson,G,6-6,191,Soph.,Atlanta, GA
+Memphis,MEMP,memphis-tigers,15,Dominic Woodson,F,6-10,310,Fr.,Round Rock, TX
+Rutgers,RUT,rutgers-scarlet-knights,15,Craig Brown,G-F,6-5,220,Jr.,Miami, FL
+Rutgers,RUT,rutgers-scarlet-knights,55,D'Von Campbell,G,5-11,178,Jr.,Arlington, TX
+Rutgers,RUT,rutgers-scarlet-knights,10,Junior Etou,F,6-7,225,Fr.,Upper Marlboro, MD
+Rutgers,RUT,rutgers-scarlet-knights,11,Kadeem Jack,F,6-9,230,Jr.,Queens, NY
+Rutgers,RUT,rutgers-scarlet-knights,33,Wally Judge,F,6-9,250,Sr.,Washington, DC
+Rutgers,RUT,rutgers-scarlet-knights,30,Logan Kelley,G,6-2,200,Soph.,Mountainside, NJ
+Rutgers,RUT,rutgers-scarlet-knights,999,Malick Kone,G-F,6-5,200,Jr.,Conakry, Guinea
+Rutgers,RUT,rutgers-scarlet-knights,35,Greg Lewis,F,6-9,260,Soph.,Randallstown, MD
+Rutgers,RUT,rutgers-scarlet-knights,4,Myles Mack,G,5-9,175,Jr.,Paterson, NJ
+Rutgers,RUT,rutgers-scarlet-knights,44,J.J. Moore,F,6-6,215,Sr.,Brentwood, NY
+Rutgers,RUT,rutgers-scarlet-knights,3,Kerwin Okoro,G-F,6-5,220,Soph.,Bronx, NY
+Rutgers,RUT,rutgers-scarlet-knights,1,Jerome Seagears,G,6-1,175,Jr.,Silver Spring, MD
+Rutgers,RUT,rutgers-scarlet-knights,21,Stephen Zurich,F,6-5,205,Soph.,Montvale, NJ
+South Florida,SFLA,south-florida-bulls,1,Musa Abdul-Aleem,G,6-5,221,Jr.,Atlanta, GA
+South Florida,SFLA,south-florida-bulls,4,Corey Allen Jr.,G,6-1,147,Jr.,St. Louis, MO
+South Florida,SFLA,south-florida-bulls,0,Martino Brock,G,6-5,205,Sr.,Memphis, TN
+South Florida,SFLA,south-florida-bulls,24,Dre' Clayton,F,6-6,275,Fr.,Orlando, FL
+South Florida,SFLA,south-florida-bulls,11,Anthony Collins,G,6-1,175,Jr.,Houston, TX
+South Florida,SFLA,south-florida-bulls,5,John Egbunu,C,6-10,249,Fr.,Ft. Walton Beach, FL
+South Florida,SFLA,south-florida-bulls,23,Javontae Hawkins,G,6-5,202,Soph.,Flint, MI
+South Florida,SFLA,south-florida-bulls,10,Josh Heath,G,6-2,166,Fr.,Tampa, FL
+South Florida,SFLA,south-florida-bulls,3,Zach LeDay,F,6-7,223,Soph.,The Colony, TX
+South Florida,SFLA,south-florida-bulls,15,Shemiye McLendon,G,6-3,195,Jr.,Vero Beach, FL
+South Florida,SFLA,south-florida-bulls,35,Jordan Omogbehin,C,7-3,330,Soph.,Lagos, Nigeria
+South Florida,SFLA,south-florida-bulls,23,Chris Perry,F-C,6-8,241,Fr.,Bartow, FL
+South Florida,SFLA,south-florida-bulls,2,Victor Rudd,F,6-9,229,Sr.,Los Angeles, CA
+South Florida,SFLA,south-florida-bulls,30,Bo Zeigler,G-F,6-6,180,Fr.,Detroit, MI
+Southern Methodist,SMU,southern-methodist-mustangs,3,Sterling Brown,G,6-6,200,Fr.,Chicago, IL
+Southern Methodist,SMU,southern-methodist-mustangs,15,Cannen Cunningham,C,6-10,225,Jr.,Arlington, TX
+Southern Methodist,SMU,southern-methodist-mustangs,10,Kevin Dunleavy,G,6-3,180,Jr.,New Providence, NJ
+Southern Methodist,SMU,southern-methodist-mustangs,4,Keith Frazier,G,6-5,190,Fr.,Dallas, TX
+Southern Methodist,SMU,southern-methodist-mustangs,13,Crandall Head,G,6-4,180,Jr.,Matteson, IL
+Southern Methodist,SMU,southern-methodist-mustangs,5,Markus Kennedy,F,6-9,245,Soph.,Philadelphia, PA
+Southern Methodist,SMU,southern-methodist-mustangs,1,Ryan Manuel,G,6-4,185,Jr.,Houston, TX
+Southern Methodist,SMU,southern-methodist-mustangs,11,Nic Moore,G,5-9,170,Soph.,Winona Lake, IN
+Southern Methodist,SMU,southern-methodist-mustangs,34,Ben Moore,F,6-8,185,Fr.,Bolingbrook, IL
+Southern Methodist,SMU,southern-methodist-mustangs,35,Yanick Moreira,C,6-11,220,Jr.,Luanda, Angola
+Southern Methodist,SMU,southern-methodist-mustangs,24,Jean-Micheal Mudiay,G,6-3,200,Jr.,Arlington, TX
+Southern Methodist,SMU,southern-methodist-mustangs,12,Nick Russell,G,6-4,210,Sr.,Duncanville, TX
+Southern Methodist,SMU,southern-methodist-mustangs,20,Jonathan Wilfong,G,6-2,185,Fr.,Memphis, TN
+Southern Methodist,SMU,southern-methodist-mustangs,2,Shawn Williams,F,6-7,230,Sr.,Duncanville, TX
+Temple,TEMPLE,temple-owls,1,Josh Brown,G,6-3,185,Fr.,Irvington, NJ
+Temple,TEMPLE,temple-owls,2,Will Cummings,G,6-2,175,Jr.,Jacksonville, FL
+Temple,TEMPLE,temple-owls,25,Quenton DeCosey,G,6-5,180,Soph.,Union, NJ
+Temple,TEMPLE,temple-owls,42,Daniel Dingle,G-F,6-7,225,Soph.,Bronx, NY
+Temple,TEMPLE,temple-owls,3,Anthony Lee,F,6-9,230,Jr.,Columbia, MD
+Temple,TEMPLE,temple-owls,15,Jimmy McDonnell,F,6-10,210,Jr.,Jackson, NJ
+Temple,TEMPLE,temple-owls,13,Nick Pendergast,F,6-5,180,Jr.,Bridgewater, CT
+Temple,TEMPLE,temple-owls,32,Dalton Pepper,G,6-5,220,Sr.,Levittown, PA
+Temple,TEMPLE,temple-owls,23,Devontae Watson,F-C,6-10,210,Soph.,Ambridge, PA
+Temple,TEMPLE,temple-owls,10,Mark Williams,F,6-8,240,Fr.,Cleveland, OH
+UCF,UCF,ucf-knights,52,Staphon Blair,F,6-9,250,Soph.,Fort Lauderdale, FL
+UCF,UCF,ucf-knights,10,Tyler Coons,G,6-2,185,Soph.,Orlando, FL
+UCF,UCF,ucf-knights,22,Brandon Goodwin,G,6-0,175,Fr.,Norcross, GA
+UCF,UCF,ucf-knights,24,Steven Haney,G-F,6-6,190,Fr.,Fort Lauderdale, FL
+UCF,UCF,ucf-knights,15,Dylan Karell,F,6-11,230,Soph.,North Miami Beach, FL
+UCF,UCF,ucf-knights,21,Isaac Lang,G,6-1,195,Sr.,Tampa, FL
+UCF,UCF,ucf-knights,34,Justin McBride,C,6-10,310,Fr.,Starke, FL
+UCF,UCF,ucf-knights,5,Eugene McCrory,F,6-8,240,Jr.,Riverdale, MD
+UCF,UCF,ucf-knights,11,Calvin Newell,G,6-1,210,Sr.,Philadelphia, PA
+UCF,UCF,ucf-knights,1,Tristan Spurlock,F,6-8,230,Sr.,Woodbridge, VA
+UCF,UCF,ucf-knights,3,Isaiah Sykes,G,6-6,220,Sr.,Detroit, MI
+UCF,UCF,ucf-knights,4,Daiquan Walker,G,6-2,180,Soph.,Philadelphia, PA
+UCF,UCF,ucf-knights,12,Matt Williams,G,6-5,220,Soph.,Orlando, FL
+UCF,UCF,ucf-knights,32,Kasey Wilson,F,6-7,225,Jr.,North Port, FL
+Albany,ALBANY,albany-great-danes,11,Luke Devlin,F,6-8,235,Sr.,Sydney, Australia
+Albany,ALBANY,albany-great-danes,15,Ede Egharevba,F,6-6,210,Soph.,Rosedale, NY
+Albany,ALBANY,albany-great-danes,24,Dallas Ennema,F,6-6,210,Fr.,Sheldon, IA
+Albany,ALBANY,albany-great-danes,3,DJ Evans,G,5-9,175,Sr.,Brandon, MS
+Albany,ALBANY,albany-great-danes,5,Anders Haas,G,6-1,175,Soph.,Copenhagen, Denmark
+Albany,ALBANY,albany-great-danes,12,Peter Hooley,G,6-4,200,Soph.,Hahndorf, Australia
+Albany,ALBANY,albany-great-danes,20,Gary Johnson,F,6-6,205,Sr.,Moreno Valley, CA
+Albany,ALBANY,albany-great-danes,0,Anthony Odunsi,G,6-4,210,Jr.,Sugar Land, TX
+Albany,ALBANY,albany-great-danes,44,John Puk,C,6-10,235,Sr.,Waterloo, IA
+Albany,ALBANY,albany-great-danes,14,Sam Rowley,F,6-6,230,Jr.,Sydney, Australia
+Albany,ALBANY,albany-great-danes,10,Mike Rowley,F,6-8,230,Fr.,Sydney, Australia
+Albany,ALBANY,albany-great-danes,4,Levan Shengelia,F,6-9,250,Jr.,Tbilisi, Georgia
+Albany,ALBANY,albany-great-danes,22,Dave Wiegmann,F,6-8,215,Sr.,Breese, IL
+Albany,ALBANY,albany-great-danes,13,Reece Williams,G,6-1,200,Soph.,White Plains, NYan-american-broncs
+UMKC,UMKC,umkc-kangaroos
+Utah Valley,UTVALL,utah-valley-wolverines

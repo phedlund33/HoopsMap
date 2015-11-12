@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Summit_2014" id="Summit_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>Summit_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Summit_2014">
+		<SimpleData name="ID">304</SimpleData>
+		<SimpleData name="SCHOOL">Oral Roberts</SimpleData>
+		<SimpleData name="CONFERENCE">Summit</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">36.047890000000002</SimpleData>
+		<SimpleData name="LON">-95.955730000000003</SimpleData>
+		<SimpleData name="ARENA NAME">Mabee Center</SimpleData>
+		<SimpleData name="ARENA CAPA">11300</SimpleData>
+		<SimpleData name="FULL NAME">Oral Roberts Golden Eagles</SimpleData>
+		<SimpleData name="area">112.868357083574890</SimpleData>
+		<SimpleData name="perim">45.809020038470180</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-95.95573,36.04789 -104.961592,39.682106 -96.799025,46.900442 -85.124444,41.115556 -86.175,39.770556 -95.95573,36.04789</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="CAA_2014" id="CAA_2014">
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="SCHOOL" type="string"></SimpleField>
+	<SimpleField name="CONFERENCE" type="string"></SimpleField>
+	<SimpleField name="CONFEREN_1" type="string"></SimpleField>
+	<SimpleField name="ARENA LOCA" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="ARENA NAME" type="string"></SimpleField>
+	<SimpleField name="ARENA CAPA" type="string"></SimpleField>
+	<SimpleField name="TEAM ABBRE" type="string"></SimpleField>
+	<SimpleField name="ARENA OPEN" type="int"></SimpleField>
+	<SimpleField name="FULL NAME" type="string"></SimpleField>
+	<SimpleField name="area" type="float"></SimpleField>
+	<SimpleField name="perim" type="float"></SimpleField>
+</Schema>
+<Folder><name>CAA_2014</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#CAA_2014">
+		<SimpleData name="ID">286</SimpleData>
+		<SimpleData name="SCHOOL">Elon</SimpleData>
+		<SimpleData name="CONFERENCE">CAA</SimpleData>
+		<SimpleData name="CONFEREN_1">Low</SimpleData>
+		<SimpleData name="ARENA LOCA">36.103375000000000</SimpleData>
+		<SimpleData name="LON">-79.505416999999994</SimpleData>
+		<SimpleData name="ARENA NAME">Alumni Gym</SimpleData>
+		<SimpleData name="ARENA CAPA">1607</SimpleData>
+		<SimpleData name="FULL NAME">Elon Phoenix</SimpleData>
+		<SimpleData name="area">23.903778271093643</SimpleData>
+		<SimpleData name="perim">27.564270504183256</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><altitudeMode>relativeToGround</altitudeMode><coordinates>-79.934399,32.78566 -79.505417,36.103375 -78.868854,38.431892 -71.084444,42.341111 -77.878518,34.224932 -79.934399,32.78566</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>
